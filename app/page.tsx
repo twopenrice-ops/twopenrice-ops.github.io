@@ -1,9 +1,9 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 type Lang = "tc" | "en";
-type View = "home" | "package" | "checkout" | "done" | "orders" | "admin";
+type View = "home" | "package" | "checkout" | "done" | "admin";
 type PayMethod = "card" | "apple";
 
 type Session = {
@@ -56,14 +56,12 @@ const makeDefaultData = (): Database => ({
 const COPY = {
   tc: {
     demo: "功能展示 DEMO｜不會進行實際扣款",
-    orders: "我的訂單",
     lang: "EN",
     heroEyebrow: "ASIA MILES 會員限定｜OPENRICE 專屬保留位",
     heroTitle: "首爾一位難求，今晚為你留位。",
     heroLead: "OpenRice 為 Asia Miles 會員保留四個週五晚間席次。選擇日期與桌型，完成付款即可確認訂位。",
     trustLine: "Asia Miles 會員限定・四個週五晚上・付款完成即確認訂位",
     book: "查看專屬保留場次",
-    lookup: "查訂單",
     venueLabel: "地點",
     venue: "金豬食堂 台北旗艦店",
     address: "台北市中山區南京東路一段 29 號",
@@ -94,18 +92,18 @@ const COPY = {
       { no: "02", title: "金豬經典一次到位", body: "招牌熟成豬肉、帶骨牛小排、泡菜鍋與主食都已安排，價格包含 10% 服務費。" },
       { no: "03", title: "直接付款，立即確認", body: "不必先下載 App 或申請帳號。以 Asia Miles 會員號碼確認資格後，即可完成訂位。" },
     ],
-    serviceBy: "本活動由 OpenRice 提供訂位、付款與行前通知服務。付款完成後，可選擇透過 LINE 接收這筆訂位的後續提醒。",
+    serviceBy: "本活動由 OpenRice 提供訂位與付款服務。完成付款後，將訂位綁定至 OpenRice LINE，即可查詢、申請取消並接收行前通知。",
     menuTitle: "這桌會吃到",
     menuMeat: "熟成豚梅花、帶骨熟成豚五花、熟成豚松阪、熟成豚霜降、特級帶骨牛小排",
     menuVeg: "季節生菜、金豬特選羅勒、杏鮑菇、大蒜與大蔥",
     menuMain: "金豬經典泡菜鍋、韓國農心 Q 拉麵、越光米飯",
     menuNote: "實際品項依現場提供為準，恕不接受客製調整。",
     howTitle: "選好日期，四步完成訂位",
-    steps: ["選擇專屬保留日期", "選 4 人或 6 人桌", "以會員號碼確認資格並付款", "用 Email 或 LINE 接收訂位服務"],
+    steps: ["選擇專屬保留日期", "選 4 人或 6 人桌", "以會員號碼確認資格並付款", "將訂位綁定至 OpenRice LINE"],
     noticeTitle: "訂位前先看",
     noticeGroups: [
       { title: "報到方式", items: ["請於場次前 15 分鐘抵達餐廳。", "向服務人員表示為亞洲萬里通訂位貴賓，並出示會員卡及訂位確認。", "無法出示訂位確認者，恕無法入座、退款或改期。"] },
-      { title: "訂購須知", items: ["完成訂位後無法修改日期、場次或桌數。", "套餐限對應人數用餐；人數不足不退費，也不提供加人。", "遲到超過 15 分鐘或未報到視同放棄，不退款、不改期。", "如有過敏、素食或不食辣需求，購買前請先確認可接受固定菜單。"] },
+      { title: "訂購須知", items: ["完成訂位後無法修改日期、場次或桌數。", "訂位查詢與取消申請僅透過 OpenRice LINE 官方帳號辦理；退款方式與期限依正式活動規則為準。", "套餐限對應人數用餐；人數不足不退費，也不提供加人。", "遲到超過 15 分鐘或未報到視同放棄，不退款、不改期。", "如有過敏、素食或不食辣需求，購買前請先確認可接受固定菜單。"] },
       { title: "場地與其他規範", items: ["不提供自備酒水，桌位由餐廳安排。", "除導盲犬外恕不開放寵物入場，餐廳內全面禁菸。", "現場將進行拍攝，影像可能用於活動宣傳。", "不可抗力造成活動取消時，將於活動頁公告後續辦法。"] },
     ],
     selectTitle: "選擇桌型",
@@ -142,14 +140,15 @@ const COPY = {
     needPay: "請選擇付款方式。",
     noStock: "很抱歉，桌數剛被其他訂單買走，請重新選擇。",
     doneTitle: "訂位完成",
-    doneSub: "訂位確認已寄到你的電子郵件（示意）。報到時請出示下方訂單編號與國泰會員卡。",
-    lineEyebrow: "OPENRICE LINE 訂位服務",
-    lineTitle: "把這筆訂位存進 LINE",
-    lineBody: "加入 OpenRice LINE 官方帳號後，我們會依這筆已成立的訂位提供：",
-    lineBenefits: ["訂位憑證隨時查看", "用餐前 7 天與前 1 天提醒", "餐廳地址、導航與臨時異動通知"],
-    lineButton: "用 LINE 接收訂位服務",
-    lineConnected: "已加入 LINE 行前提醒（示意）",
-    linePrivacy: "僅傳送這筆訂位與 OpenRice 餐飲服務相關訊息，可隨時取消接收。",
+    doneSub: "訂位確認已寄到你的電子郵件（示意）。請接著將這筆訂位綁定至 OpenRice LINE，之後的查詢與取消都從 LINE 辦理。",
+    lineEyebrow: "下一步｜綁定 OPENRICE LINE",
+    lineTitle: "將這筆訂位綁定到 LINE",
+    lineBody: "按下後會開啟 OpenRice LINE 官方帳號並帶入這筆訂位編號。完成綁定後，LINE bot 就是你的訂位管理入口：",
+    lineBenefits: ["查詢訂位資料與電子憑證", "依活動規則提出取消申請", "接收行前提醒、地址導航與臨時異動通知"],
+    lineButton: "綁定訂位到 LINE",
+    lineConnected: "訂位已綁定 LINE（示意）",
+    lineConnectedHelp: "之後可直接在 LINE 輸入「查詢訂位」或「取消訂位」。",
+    linePrivacy: "LINE bot 僅依訂位編號處理這筆訂位與相關餐飲服務訊息，可隨時取消接收。",
     orderNo: "訂單編號",
     dining: "用餐場次",
     items: "訂購內容",
@@ -157,13 +156,7 @@ const COPY = {
     paidBy: "付款方式",
     total: "實付金額",
     proof: "購買證明｜DEMO",
-    viewOrders: "查看我的訂單",
     home: "回活動首頁",
-    ordersTitle: "我的訂單",
-    ordersSub: "輸入購買時使用的電子郵件即可查詢，不用登入。",
-    search: "查詢",
-    notSearched: "輸入電子郵件後查詢。",
-    none: "查無訂單，請確認電子郵件是否正確。",
     admin: "場次管理",
     adminSub: "展示用後台。修改後按儲存，活動頁才會更新。",
     adminNote: "資料只存在這台裝置的瀏覽器。正式版會改用雲端資料庫並加上登入保護。",
@@ -189,14 +182,12 @@ const COPY = {
   },
   en: {
     demo: "FUNCTIONAL DEMO | No real payment will be charged",
-    orders: "My orders",
     lang: "中文",
     heroEyebrow: "EXCLUSIVE TO ASIA MILES MEMBERS | RESERVED BY OPENRICE",
     heroTitle: "Taipei’s hard-to-book table, reserved for you.",
     heroLead: "OpenRice has secured selected Friday evening seats at Gold Pig for Asia Miles members. Choose a date and table, then pay to confirm.",
     trustLine: "Asia Miles members only · Four Friday evenings · Confirmed after payment",
     book: "View reserved dates",
-    lookup: "Find an order",
     venueLabel: "Venue",
     venue: "Gold Pig, Taipei Flagship",
     address: "No. 29, Sec. 1, Nanjing E. Rd., Taipei",
@@ -227,18 +218,18 @@ const COPY = {
       { no: "02", title: "Gold Pig classics included", body: "Signature aged pork, bone-in beef short rib, kimchi stew and staples, with the 10% service charge included." },
       { no: "03", title: "One clear checkout", body: "There is no need to download an app or create an account first. Verify with your Asia Miles membership number and confirm." },
     ],
-    serviceBy: "OpenRice provides booking, payment and pre-visit support for this event. After payment, you may receive updates for this booking through LINE.",
+    serviceBy: "OpenRice provides booking and payment for this event. After payment, link the booking to OpenRice LINE to view it, request cancellation and receive service updates.",
     menuTitle: "On the table",
     menuMeat: "Four aged pork cuts and premium bone-in beef short rib",
     menuVeg: "Seasonal greens, Gold Pig basil, mushrooms, garlic and spring onion",
     menuMain: "Gold Pig kimchi stew, Nongshim Q noodles and Koshihikari rice",
     menuNote: "Items may vary on the day. Menu changes are not available.",
     howTitle: "Four steps from date to confirmation",
-    steps: ["Choose a reserved date", "Choose a table for 4 or 6", "Verify membership and pay", "Receive booking support by email or LINE"],
+    steps: ["Choose a reserved date", "Choose a table for 4 or 6", "Verify membership and pay", "Link the booking to OpenRice LINE"],
     noticeTitle: "Before you book",
     noticeGroups: [
       { title: "Check-in", items: ["Arrive 15 minutes before your seating.", "Tell staff you are an Asia Miles guest and show your membership card and booking confirmation.", "Guests without confirmation cannot be admitted, refunded or moved."] },
-      { title: "Booking policy", items: ["Date, seating and table size cannot be changed after payment.", "Sets are for the listed party size; unused seats are not refundable and extra guests cannot be added.", "Guests over 15 minutes late or absent forfeit the booking without refund.", "Please confirm the fixed menu is suitable for any allergies or dietary needs before purchase."] },
+      { title: "Booking policy", items: ["Date, seating and table size cannot be changed after payment.", "Booking enquiries and cancellation requests are handled only through the OpenRice LINE Official Account. Refund method and deadlines follow the final event policy.", "Sets are for the listed party size; unused seats are not refundable and extra guests cannot be added.", "Guests over 15 minutes late or absent forfeit the booking without refund.", "Please confirm the fixed menu is suitable for any allergies or dietary needs before purchase."] },
       { title: "Venue policy", items: ["Outside alcohol is not allowed and seating is assigned by the restaurant.", "Only guide dogs are admitted. Smoking is prohibited.", "Photography and filming may take place for event promotion.", "If force majeure affects the event, next steps will be posted on this page."] },
     ],
     selectTitle: "Choose table size",
@@ -275,14 +266,15 @@ const COPY = {
     needPay: "Choose a payment method.",
     noStock: "Those tables were just taken. Please choose again.",
     doneTitle: "Booking confirmed",
-    doneSub: "Your booking confirmation has been emailed (demo). Show the order number and your Cathay membership card at check-in.",
-    lineEyebrow: "OPENRICE BOOKING SUPPORT ON LINE",
-    lineTitle: "Keep this booking in LINE",
-    lineBody: "Add the OpenRice LINE Official Account to receive support for this confirmed booking:",
-    lineBenefits: ["Your booking confirmation on hand", "Reminders 7 days and 1 day before dining", "Address, directions and important service updates"],
-    lineButton: "Receive booking support in LINE",
-    lineConnected: "LINE reminders added (demo)",
-    linePrivacy: "We will only send messages related to this booking and OpenRice dining services. You may opt out at any time.",
+    doneSub: "Your booking confirmation has been emailed (demo). Now link this booking to OpenRice LINE; future enquiries and cancellations will be handled there.",
+    lineEyebrow: "NEXT｜LINK OPENRICE LINE",
+    lineTitle: "Link this booking to LINE",
+    lineBody: "The button opens the OpenRice LINE Official Account with this booking number. Once linked, the LINE bot becomes your booking management channel:",
+    lineBenefits: ["View booking details and the digital confirmation", "Request cancellation under the event policy", "Receive reminders, directions and important service updates"],
+    lineButton: "Link booking to LINE",
+    lineConnected: "Booking linked to LINE (demo)",
+    lineConnectedHelp: "You can now type “View booking” or “Cancel booking” in LINE.",
+    linePrivacy: "The LINE bot uses the booking number only to manage this booking and related dining service messages. You may opt out at any time.",
     orderNo: "Order number",
     dining: "Seating",
     items: "Items",
@@ -290,13 +282,7 @@ const COPY = {
     paidBy: "Paid with",
     total: "Total paid",
     proof: "PROOF OF PURCHASE | DEMO",
-    viewOrders: "View my orders",
     home: "Event home",
-    ordersTitle: "My orders",
-    ordersSub: "Enter the email used at checkout. No sign-in required.",
-    search: "Search",
-    notSearched: "Enter your email to search.",
-    none: "No orders found. Check that the email is correct.",
     admin: "Session manager",
     adminSub: "Demo organizer view. Changes only go live after you save.",
     adminNote: "Data is stored only in this browser. The live site will use a secured cloud database.",
@@ -357,8 +343,6 @@ export default function Home() {
   const payingRef = useRef(false);
   const [lastOrderNo, setLastOrderNo] = useState("");
   const [lineConnected, setLineConnected] = useState(false);
-  const [lookupEmail, setLookupEmail] = useState("");
-  const [hasLooked, setHasLooked] = useState(false);
   const [adminDraft, setAdminDraft] = useState<Database | null>(null);
   const [adminDirty, setAdminDirty] = useState(false);
   const [savedFlash, setSavedFlash] = useState(false);
@@ -404,11 +388,6 @@ export default function Home() {
   const session = db.sessions.find((item) => item.id === cart.sessionId);
   const orderTotal = cart.t4 * db.prices.t4 + cart.t6 * db.prices.t6;
   const lastOrder = db.orders.find((order) => order.no === lastOrderNo);
-  const lookupOrders = useMemo(
-    () => db.orders.filter((order) => order.email === lookupEmail.trim().toLowerCase()),
-    [db.orders, lookupEmail],
-  );
-
   const formatDate = (date: string) => {
     const value = new Date(`${date}T12:00:00`);
     return new Intl.DateTimeFormat(lang === "tc" ? "zh-TW" : "en-US", {
@@ -605,7 +584,6 @@ export default function Home() {
           <BrandLockup />
         </button>
         <nav>
-          <button onClick={() => navigate("orders")}>{c.orders}</button>
           <button className="langButton" onClick={toggleLang}>{c.lang}</button>
         </nav>
       </header>
@@ -625,7 +603,6 @@ export default function Home() {
           <p className="heroLead">{c.heroLead}</p>
           <div className="heroActions">
             <a className="primaryButton" href="#sessions">{c.book}</a>
-            <button className="textButton" onClick={() => navigate("orders")}>{c.lookup}</button>
           </div>
           <p className="trustLine">{c.trustLine}</p>
         </div>
@@ -829,31 +806,20 @@ export default function Home() {
             <ul>{c.lineBenefits.map((item) => <li key={item}>{item}</li>)}</ul>
             <small>{c.linePrivacy}</small>
           </div>
-          <button className={`lineButton ${lineConnected ? "connected" : ""}`} type="button" onClick={() => setLineConnected(true)} disabled={lineConnected}>
-            <span className="lineMark" aria-hidden="true">LINE</span>
-            {lineConnected ? c.lineConnected : c.lineButton}
-          </button>
+          <div className="lineHandoffAction">
+            <button className={`lineButton ${lineConnected ? "connected" : ""}`} type="button" onClick={() => setLineConnected(true)} disabled={lineConnected}>
+              <span className="lineMark" aria-hidden="true">LINE</span>
+              {lineConnected ? c.lineConnected : c.lineButton}
+            </button>
+            {lineConnected && <p className="lineConnectedHelp" aria-live="polite">{c.lineConnectedHelp}</p>}
+          </div>
         </section>
         <div className="doneActions">
-          <button className="secondaryButton" onClick={() => { setLookupEmail(lastOrder.email); setHasLooked(true); navigate("orders"); }}>{c.viewOrders}</button>
           <button className="primaryButton" onClick={() => navigate("home")}>{c.home}</button>
         </div>
       </main>
     );
   };
-
-  const OrdersView = () => (
-    <main className="subpage ordersPage">
-      <button className="backLink" onClick={() => navigate("home")}>← {c.home}</button>
-      <h1>{c.ordersTitle}</h1>
-      <p className="subLead">{c.ordersSub}</p>
-      <div className="lookupForm">
-        <input type="email" value={lookupEmail} onChange={(e) => setLookupEmail(e.target.value)} placeholder="name@example.com" onKeyDown={(e) => { if (e.key === "Enter") setHasLooked(true); }} />
-        <button className="primaryButton" onClick={() => setHasLooked(true)}>{c.search}</button>
-      </div>
-      {!hasLooked ? <div className="emptyState">{c.notSearched}</div> : lookupOrders.length ? lookupOrders.map((order) => <Ticket order={order} key={order.no} />) : <div className="emptyState">{c.none}</div>}
-    </main>
-  );
 
   const AdminView = () => {
     if (!adminDraft) return <HomeView />;
@@ -901,7 +867,6 @@ export default function Home() {
       {view === "package" && <PackageView />}
       {view === "checkout" && <CheckoutView />}
       {view === "done" && <DoneView />}
-      {view === "orders" && <OrdersView />}
       {view === "admin" && <AdminView />}
       <footer className="siteFooter">
         <div><BrandLockup /><small>{c.serviceBy}<br />Copyright © OpenRice Group Inc.｜DEMO</small></div>
