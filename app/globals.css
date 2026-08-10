@@ -107,7 +107,7 @@ img { display: block; max-width: 100%; }
   line-height: 1.08;
 }
 .memberHeroPhoto { margin: 0; }
-.memberHeroPhoto img { width: 100%; aspect-ratio: 5/4; object-fit: cover; object-position: center 68%; }
+.memberHeroPhoto img { width: 100%; aspect-ratio: 5/4; object-fit: cover; object-position: center; }
 .memberHeroPhoto figcaption {
   padding: 14px 0 0;
   display: flex;
@@ -195,7 +195,7 @@ img { display: block; max-width: 100%; }
 .menuHeroPhoto { margin: 0; position: sticky; top: 105px; }
 .menuHeroPhoto img {
   width: 100%;
-  aspect-ratio: 1 / 1.08;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   object-position: center;
   box-shadow: 18px 18px 0 #7f181a;

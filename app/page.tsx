@@ -622,7 +622,7 @@ export default function Home() {
           <p className="trustLine">{c.trustLine}</p>
         </div>
         <figure className="memberHeroPhoto">
-          <img src="./assets/gold-pig-grill.jpg" alt={lang === "tc" ? "金豬食堂桌邊代烤熟成燒肉" : "Gold Pig aged barbecue grilled at the table"} />
+          <img src="./assets/gold-pig-grilled-pork-highres.jpg" alt={lang === "tc" ? "金豬食堂桌邊代烤熟成燒肉" : "Gold Pig aged barbecue grilled at the table"} />
           <figcaption><span>TABLESIDE GRILLING</span><b>{lang === "tc" ? "桌邊代烤實景" : "Grilled at your table"}</b></figcaption>
         </figure>
       </section>
@@ -636,7 +636,7 @@ export default function Home() {
       <section className="menuSection" id="menu">
         <div className="menuShowcase">
           <figure className="menuHeroPhoto">
-            <img src="./assets/gold-pig-set.jpg" alt={lang === "tc" ? "熟成豬肉、牛小排、泡菜鍋與配菜完整套餐" : "Complete set with aged pork, beef short rib, kimchi stew and sides"} />
+            <img loading="lazy" src="./assets/gold-pig-table-spread-highres.jpg" alt={lang === "tc" ? "熟成豬肉、牛小排、泡菜鍋與配菜完整套餐" : "Complete set with aged pork, beef short rib, kimchi stew and sides"} />
             <figcaption>{lang === "tc" ? "金豬食堂經典套餐實拍" : "Gold Pig signature set menu"}</figcaption>
           </figure>
           <div className="menuShowcaseCopy">
@@ -663,9 +663,9 @@ export default function Home() {
           <h2>{c.experienceTitle}</h2>
         </div>
         <div className="photoMosaic">
-          <figure className="photoMosaicLead"><img src="./assets/gold-pig-meat-prep.jpg" alt={c.experienceCaptions[0]} /><figcaption>{c.experienceCaptions[0]}</figcaption></figure>
-          <figure><img src="./assets/gold-pig-grill.jpg" alt={c.experienceCaptions[1]} /><figcaption>{c.experienceCaptions[1]}</figcaption></figure>
-          <figure><img src="./assets/gold-pig-chefs.jpg" alt={c.experienceCaptions[2]} /><figcaption>{c.experienceCaptions[2]}</figcaption></figure>
+          <figure className="photoMosaicLead"><img loading="lazy" src="./assets/gold-pig-meat-prep.jpg" alt={c.experienceCaptions[0]} /><figcaption>{c.experienceCaptions[0]}</figcaption></figure>
+          <figure><img loading="lazy" src="./assets/gold-pig-grilled-pork-highres.jpg" alt={c.experienceCaptions[1]} /><figcaption>{c.experienceCaptions[1]}</figcaption></figure>
+          <figure><img loading="lazy" src="./assets/gold-pig-chefs.jpg" alt={c.experienceCaptions[2]} /><figcaption>{c.experienceCaptions[2]}</figcaption></figure>
         </div>
       </section>
 
@@ -744,7 +744,7 @@ export default function Home() {
             const stock = remaining(session, key);
             return (
               <article className={`packageRow ${qty ? "selected" : ""}`} key={key}>
-                <img src={isFour ? "./assets/gold-pig-meat-prep.jpg" : "./assets/gold-pig-grill.jpg"} alt="" />
+                <img src={isFour ? "./assets/gold-pig-meat-prep.jpg" : "./assets/gold-pig-grilled-pork-highres.jpg"} alt="" />
                 <div className="packageCopy">
                   <h2>{isFour ? c.four : c.six}</h2>
                   <strong>{money(db.prices[key])}</strong>
@@ -761,7 +761,7 @@ export default function Home() {
           })}
         </div>
         <aside className="packageMenuPreview">
-          <img src="./assets/gold-pig-set.jpg" alt="" />
+          <img loading="lazy" src="./assets/gold-pig-table-spread-highres.jpg" alt="" />
           <div><b>{c.menuTitle}</b><p>{c.menuPreview}</p><small>{c.menuNote}</small></div>
         </aside>
         <div className="stickySummary">
