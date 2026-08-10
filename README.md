@@ -2,6 +2,8 @@
 
 OpenRice 為 Asia Miles 會員設計的金豬食堂台北活動頁 Demo。
 
+公開網站：<https://twopenrice-ops.github.io/>
+
 ## Demo 範圍
 
 - 繁體中文／英文切換
