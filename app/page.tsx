@@ -605,7 +605,7 @@ export default function Home() {
     </>
   );
 
-  const HomeView = () => (
+  const renderHome = () => (
     <main>
       <section className="campaignMasthead" aria-label={lang === "tc" ? "金豬食堂活動主視覺" : "Gold Pig campaign visual"}>
         <img src="./assets/gold-pig-hero.jpg" alt={lang === "tc" ? "國泰航空服務人員與金豬食堂活動主視覺" : "Cathay service ambassador with the Gold Pig campaign"} />
@@ -728,8 +728,8 @@ export default function Home() {
     </main>
   );
 
-  const PackageView = () => {
-    if (!session) return <HomeView />;
+  const renderPackage = () => {
+    if (!session) return renderHome();
     const totalQty = cart.t4 + cart.t6;
     return (
       <main className="subpage">
@@ -773,10 +773,10 @@ export default function Home() {
     );
   };
 
-  const CheckoutView = () => {
-    if (!session || cart.t4 + cart.t6 === 0) return <PackageView />;
+  const renderCheckout = () => {
+    if (!session || cart.t4 + cart.t6 === 0) return renderPackage();
     const setFormValue = (key: keyof typeof form, value: string) => {
-      setForm({ ...form, [key]: value });
+      setForm((current) => ({ ...current, [key]: value }));
       if (key === "aml") setVerified(false);
     };
     return (
@@ -827,8 +827,8 @@ export default function Home() {
     );
   };
 
-  const DoneView = () => {
-    if (!lastOrder) return <HomeView />;
+  const renderDone = () => {
+    if (!lastOrder) return renderHome();
     return (
       <main className="subpage donePage">
         <p className="eyebrow">04 / 04</p>
@@ -858,8 +858,8 @@ export default function Home() {
     );
   };
 
-  const AdminView = () => {
-    if (!adminDraft) return <HomeView />;
+  const renderAdmin = () => {
+    if (!adminDraft) return renderHome();
     return (
       <main className="subpage adminPage">
         <button className="backLink" onClick={() => navigate("home")}>← {c.home}</button>
@@ -900,11 +900,11 @@ export default function Home() {
   return (
     <div className="site" lang={lang === "tc" ? "zh-Hant" : "en"}>
       <Header />
-      {view === "home" && <HomeView />}
-      {view === "package" && <PackageView />}
-      {view === "checkout" && <CheckoutView />}
-      {view === "done" && <DoneView />}
-      {view === "admin" && <AdminView />}
+      {view === "home" && renderHome()}
+      {view === "package" && renderPackage()}
+      {view === "checkout" && renderCheckout()}
+      {view === "done" && renderDone()}
+      {view === "admin" && renderAdmin()}
       <footer className="siteFooter">
         <div><BrandLockup /><small>{c.serviceBy}<br />Copyright © OpenRice Group Inc.｜DEMO</small></div>
       </footer>
