@@ -4,7 +4,8 @@ The event assets in this folder are used for the functional partnership demo.
 - `gold-pig-set.jpg`: legacy low-resolution `images/111.jpg` (no longer used)
 - `brand-curve.png`: original `images/ci/CI_1920.png`
 - `openrice-logo.svg`: official OpenRice brand asset already used in the workspace
-- `asia-miles-logo.png`: Asia Miles wordmark obtained from the public Seeklogo brand asset page
+- `asia-miles-logo.png`: original Asia Miles wordmark obtained from the public Seeklogo brand asset page
+- `asia-miles-logo-transparent.png`: transparency-safe derivative used on the warm campaign background
 - `gold-pig-grill.jpg`: legacy medium-resolution editorial photograph (no longer used)
 - `gold-pig-taipei-building.jpg`, `gold-pig-chefs.jpg`:
   high-resolution editorial/press photographs from the GQ Taiwan Gold Pig Taipei launch article

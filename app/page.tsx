@@ -565,7 +565,7 @@ export default function Home() {
 
   const BrandLockup = ({ compact = false }: { compact?: boolean }) => (
     <span className={`brandLockup ${compact ? "compact" : ""}`} aria-label="Asia Miles and OpenRice">
-      <img className="asiaMilesLogo" src="./assets/asia-miles-logo.png" alt="Asia Miles" />
+      <img className="asiaMilesLogo" src="./assets/asia-miles-logo-transparent.png" alt="Asia Miles" />
       <i aria-hidden="true">×</i>
       <img className="openRiceLogo" src="./assets/openrice-logo.svg" alt="OpenRice 開飯喇" />
     </span>
@@ -598,6 +598,7 @@ export default function Home() {
           <BrandLockup />
         </button>
         <nav>
+          <a className="headerCta" href="#sessions">{c.book}</a>
           <button className="langButton" onClick={toggleLang}>{c.lang}</button>
         </nav>
       </header>
