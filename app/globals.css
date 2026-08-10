@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #fbfaf7;
-  --cream: #f2eee5;
-  --ink: #2d241c;
-  --muted: #776d63;
-  --line: #d9d2c7;
-  --red: #9f1725;
-  --red-dark: #7f0f1c;
+  --paper: #fbf7ef;
+  --cream: #f1e8da;
+  --ink: #291a13;
+  --muted: #74655a;
+  --line: #d9cdbf;
+  --red: #a62024;
+  --red-dark: #741217;
   --teal: #006564;
   --orange: #f15a22;
   --gold: #a58243;
@@ -42,7 +42,7 @@ img { display: block; max-width: 100%; }
 .siteHeader {
   height: 68px;
   padding: 0 max(24px, calc((100vw - 1120px) / 2));
-  background: rgba(251,250,247,.96);
+  background: rgba(251,247,239,.96);
   border-bottom: 1px solid var(--line);
   display: flex;
   align-items: center;
@@ -107,7 +107,7 @@ img { display: block; max-width: 100%; }
   line-height: 1.08;
 }
 .memberHeroPhoto { margin: 0; }
-.memberHeroPhoto img { width: 100%; aspect-ratio: 5/4; object-fit: cover; }
+.memberHeroPhoto img { width: 100%; aspect-ratio: 5/4; object-fit: cover; object-position: center 68%; }
 .memberHeroPhoto figcaption {
   padding: 14px 0 0;
   display: flex;
@@ -130,8 +130,8 @@ img { display: block; max-width: 100%; }
 .primaryButton, .secondaryButton {
   min-height: 48px;
   padding: 13px 24px;
-  border: 1px solid var(--teal);
-  background: var(--teal);
+  border: 1px solid var(--red);
+  background: var(--red);
   color: white;
   text-decoration: none;
   font-weight: 700;
@@ -142,7 +142,7 @@ img { display: block; max-width: 100%; }
   justify-content: center;
   cursor: pointer;
 }
-.primaryButton:hover { background: #004b4a; border-color: #004b4a; }
+.primaryButton:hover { background: var(--red-dark); border-color: var(--red-dark); }
 .primaryButton:disabled { background: #c7c0b6; border-color: #c7c0b6; cursor: not-allowed; }
 .secondaryButton { background: transparent; color: var(--ink); border-color: var(--ink); }
 .secondaryButton:hover { background: var(--ink); color: white; }
@@ -154,6 +154,15 @@ img { display: block; max-width: 100%; }
   cursor: pointer;
   font-size: 14px;
 }
+.menuTextLink {
+  padding: 7px 0 5px;
+  border-bottom: 1px solid var(--ink);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 750;
+}
+.menuTextLink:hover { color: var(--red); border-color: var(--red); }
 .factsStrip {
   width: min(1120px, calc(100% - 48px));
   margin: 0 auto;
@@ -168,6 +177,89 @@ img { display: block; max-width: 100%; }
 .factsStrip dt { margin-bottom: 8px; color: var(--teal); font-size: 11px; font-weight: 800; letter-spacing: .12em; }
 .factsStrip dd { margin: 0; font-weight: 700; line-height: 1.5; }
 .factsStrip small { display: block; margin-top: 4px; color: var(--muted); font-weight: 400; }
+
+.menuSection {
+  padding: 110px 0;
+  background: #25150f;
+  color: #fff8ed;
+  scroll-margin-top: 96px;
+}
+.menuShowcase {
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.02fr .98fr;
+  gap: 82px;
+  align-items: start;
+}
+.menuHeroPhoto { margin: 0; position: sticky; top: 105px; }
+.menuHeroPhoto img {
+  width: 100%;
+  aspect-ratio: 1 / 1.08;
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 18px 18px 0 #7f181a;
+}
+.menuHeroPhoto figcaption {
+  margin-top: 30px;
+  color: #cdbdaf;
+  font-size: 11px;
+  letter-spacing: .12em;
+}
+.menuShowcaseCopy .eyebrow { color: #dc9b54; }
+.menuShowcaseCopy h2 {
+  margin: 0;
+  font-family: "Songti TC", "Noto Serif TC", "PMingLiU", serif;
+  font-size: clamp(38px, 4.7vw, 60px);
+  line-height: 1.12;
+  letter-spacing: -.025em;
+}
+.menuIntro {
+  margin: 24px 0 38px;
+  color: #decec0;
+  font-size: 17px;
+  line-height: 1.85;
+}
+.menuGroups { border-top: 1px solid #765f52; }
+.menuGroup { padding: 25px 0 27px; border-bottom: 1px solid #604b40; }
+.menuGroup header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 15px; }
+.menuGroup header span { color: #dc9b54; font-size: 10px; font-weight: 800; letter-spacing: .12em; }
+.menuGroup h3 { margin: 0; color: #f4c47f; font-size: 15px; letter-spacing: .08em; }
+.menuGroup ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 24px;
+}
+.menuGroup li {
+  position: relative;
+  padding-left: 15px;
+  color: #fff8ed;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.menuGroup li::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  left: 0;
+  top: .68em;
+  background: #dc9b54;
+}
+.menuPriceNote {
+  margin: 24px 0 0;
+  padding: 14px 16px;
+  border-left: 3px solid #dc9b54;
+  background: rgba(255,255,255,.055);
+  color: #eadfd4;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.menuShowcaseCopy .menuNote { color: #a99588; }
+
 .experienceSection { padding: 104px 0 110px; }
 .experienceHeading {
   display: grid;
@@ -319,6 +411,20 @@ img { display: block; max-width: 100%; }
 .packageCopy > strong { color: var(--red); font-size: 18px; }
 .packageCopy p { margin: 12px 0 8px; color: var(--muted); }
 .packageCopy small { color: var(--teal); font-weight: 700; }
+.packageMenuPreview {
+  margin-top: 30px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 24px;
+  align-items: center;
+  background: #2c1a13;
+  color: #fff8ed;
+}
+.packageMenuPreview img { width: 190px; aspect-ratio: 4/3; object-fit: cover; }
+.packageMenuPreview b { display: block; color: #f4c47f; font-family: "Songti TC", serif; font-size: 21px; }
+.packageMenuPreview p { margin: 9px 0 6px; color: #eadfd4; line-height: 1.65; }
+.packageMenuPreview small { color: #ac998c; line-height: 1.5; }
 .stepper { display: grid; grid-template-columns: 42px 42px 42px; border: 1px solid var(--ink); }
 .stepper button { width: 42px; height: 42px; border: 0; background: transparent; cursor: pointer; font-size: 19px; }
 .stepper button:disabled { color: #c8c1b9; cursor: not-allowed; }
@@ -333,7 +439,7 @@ img { display: block; max-width: 100%; }
   gap: 42px;
   position: sticky;
   bottom: 0;
-  background: rgba(251,250,247,.97);
+  background: rgba(251,247,239,.97);
   z-index: 10;
 }
 .stickySummary div { text-align: right; }
@@ -487,6 +593,11 @@ img { display: block; max-width: 100%; }
   .factsStrip { width: min(100% - 36px, 680px); grid-template-columns: 1fr; }
   .factsStrip div, .factsStrip div + div { min-height: 0; padding: 18px 0; border-right: 0; border-bottom: 1px solid var(--line); }
   .factsStrip div:last-child { border-bottom: 0; }
+  .menuSection { padding: 86px 0; }
+  .menuShowcase { width: min(100% - 36px, 680px); grid-template-columns: 1fr; gap: 62px; }
+  .menuHeroPhoto { position: static; }
+  .menuHeroPhoto img { aspect-ratio: 16/11; box-shadow: 12px 12px 0 #7f181a; }
+  .menuHeroPhoto figcaption { margin-top: 24px; }
   .experienceHeading { grid-template-columns: 1fr; gap: 8px; }
   .photoMosaic { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
   .photoMosaicLead { grid-column: 1 / -1; grid-row: auto; min-height: 480px !important; }
@@ -536,6 +647,13 @@ img { display: block; max-width: 100%; }
   .photoMosaic figure:not(.photoMosaicLead) { min-height: 250px; }
   .heroLead { font-size: 16px; line-height: 1.7; }
   .heroActions { gap: 18px; }
+  .heroActions { align-items: flex-start; flex-direction: column; }
+  .menuSection { padding: 70px 0 76px; }
+  .menuShowcase { width: calc(100% - 32px); gap: 48px; }
+  .menuHeroPhoto img { aspect-ratio: 4/3; box-shadow: 9px 9px 0 #7f181a; }
+  .menuShowcaseCopy h2 { font-size: 38px; }
+  .menuIntro { font-size: 15px; }
+  .menuGroup ul { grid-template-columns: 1fr; gap: 8px; }
   .sessionsSection, .storySection, .processSection, .noticeSection { padding-top: 68px; padding-bottom: 74px; }
   .sectionHeading h2, .storyCopy h2, .processSection h2, .noticeSection h2 { font-size: 34px; }
   .sessionRow { grid-template-columns: 1fr auto; }
@@ -555,6 +673,8 @@ img { display: block; max-width: 100%; }
   .packageCopy h2 { font-size: 23px; }
   .packageCopy p { font-size: 13px; }
   .packageRow .stepper { grid-column: 1 / -1; justify-self: end; }
+  .packageMenuPreview { grid-template-columns: 1fr; padding: 16px; }
+  .packageMenuPreview img { width: 100%; aspect-ratio: 16/10; }
   .stickySummary { gap: 18px; }
   .stickySummary .primaryButton { padding-left: 18px; padding-right: 18px; }
   .stickySummary strong { font-size: 20px; }

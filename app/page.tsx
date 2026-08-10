@@ -93,10 +93,17 @@ const COPY = {
       { no: "03", title: "直接付款，立即確認", body: "不必先下載 App 或申請帳號。以 Asia Miles 會員號碼確認資格後，即可完成訂位。" },
     ],
     serviceBy: "本活動由 OpenRice 提供訂位與付款服務。完成付款後，將訂位綁定至 OpenRice LINE，即可查詢、申請取消並接收行前通知。",
-    menuTitle: "這桌會吃到",
-    menuMeat: "熟成豚梅花、帶骨熟成豚五花、熟成豚松阪、熟成豚霜降、特級帶骨牛小排",
-    menuVeg: "季節生菜、金豬特選羅勒、杏鮑菇、大蒜與大蔥",
-    menuMain: "金豬經典泡菜鍋、韓國農心 Q 拉麵、越光米飯",
+    menuKicker: "THE FULL SET MENU",
+    menuTitle: "完整套餐內容",
+    menuIntro: "五款肉品由專人桌邊代烤，搭配季節蔬菜、金豬經典泡菜鍋、韓國拉麵與越光米飯。",
+    menuGroups: [
+      { no: "01", label: "肉品", items: ["熟成豚梅花肉", "帶骨熟成豚五花", "熟成豚松阪", "熟成豚霜降", "特級帶骨牛小排"] },
+      { no: "02", label: "蔬菜", items: ["季節生菜盤", "金豬特選羅勒", "調味蔬菜組（杏鮑菇、大蒜、大蔥）"] },
+      { no: "03", label: "鍋物與主食", items: ["金豬經典泡菜鍋（含韓國農心 Q 拉麵、越光米飯）"] },
+    ],
+    menuPriceNote: "4 人桌與 6 人桌享用相同菜色；份量依桌型調整，價格已含 10% 服務費。",
+    menuCta: "先看完整菜單",
+    menuPreview: "五款肉品、季節蔬菜、金豬經典泡菜鍋、韓國農心 Q 拉麵與越光米飯。",
     menuNote: "實際品項依現場提供為準，恕不接受客製調整。",
     howTitle: "選好日期，四步完成訂位",
     steps: ["選擇專屬保留日期", "選 4 人或 6 人桌", "以會員號碼確認資格並付款", "將訂位綁定至 OpenRice LINE"],
@@ -219,10 +226,17 @@ const COPY = {
       { no: "03", title: "One clear checkout", body: "There is no need to download an app or create an account first. Verify with your Asia Miles membership number and confirm." },
     ],
     serviceBy: "OpenRice provides booking and payment for this event. After payment, link the booking to OpenRice LINE to view it, request cancellation and receive service updates.",
-    menuTitle: "On the table",
-    menuMeat: "Four aged pork cuts and premium bone-in beef short rib",
-    menuVeg: "Seasonal greens, Gold Pig basil, mushrooms, garlic and spring onion",
-    menuMain: "Gold Pig kimchi stew, Nongshim Q noodles and Koshihikari rice",
+    menuKicker: "THE FULL SET MENU",
+    menuTitle: "The complete set menu",
+    menuIntro: "Five premium cuts are grilled for you at the table, with seasonal vegetables, Gold Pig kimchi stew, Korean noodles and Koshihikari rice.",
+    menuGroups: [
+      { no: "01", label: "Meats", items: ["Aged pork collar", "Bone-in aged pork belly", "Aged pork jowl", "Aged marbled pork", "Premium bone-in beef short rib"] },
+      { no: "02", label: "Vegetables", items: ["Seasonal lettuce platter", "Gold Pig selected basil", "Seasoned vegetables (king oyster mushroom, garlic and spring onion)"] },
+      { no: "03", label: "Stew & staples", items: ["Gold Pig kimchi stew with Nongshim Q noodles and Koshihikari rice"] },
+    ],
+    menuPriceNote: "Tables for 4 and 6 enjoy the same menu, with portions adjusted by table size. Prices include the 10% service charge.",
+    menuCta: "See the full menu",
+    menuPreview: "Five premium cuts, seasonal vegetables, Gold Pig kimchi stew, Nongshim Q noodles and Koshihikari rice.",
     menuNote: "Items may vary on the day. Menu changes are not available.",
     howTitle: "Four steps from date to confirmation",
     steps: ["Choose a reserved date", "Choose a table for 4 or 6", "Verify membership and pay", "Link the booking to OpenRice LINE"],
@@ -603,12 +617,13 @@ export default function Home() {
           <p className="heroLead">{c.heroLead}</p>
           <div className="heroActions">
             <a className="primaryButton" href="#sessions">{c.book}</a>
+            <a className="menuTextLink" href="#menu">{c.menuCta} ↓</a>
           </div>
           <p className="trustLine">{c.trustLine}</p>
         </div>
         <figure className="memberHeroPhoto">
-          <img src="./assets/gold-pig-interior-crop.jpg" alt={lang === "tc" ? "金豬食堂台北店用餐空間" : "Gold Pig Taipei dining room"} />
-          <figcaption><span>GOLD PIG TAIPEI</span><b>{lang === "tc" ? "台北旗艦店實景" : "Taipei flagship"}</b></figcaption>
+          <img src="./assets/gold-pig-grill.jpg" alt={lang === "tc" ? "金豬食堂桌邊代烤熟成燒肉" : "Gold Pig aged barbecue grilled at the table"} />
+          <figcaption><span>TABLESIDE GRILLING</span><b>{lang === "tc" ? "桌邊代烤實景" : "Grilled at your table"}</b></figcaption>
         </figure>
       </section>
 
@@ -617,6 +632,30 @@ export default function Home() {
         <div><dt>{c.timeLabel}</dt><dd>{c.time}</dd></div>
         <div><dt>{c.priceLabel}</dt><dd>{c.price}</dd></div>
       </dl>
+
+      <section className="menuSection" id="menu">
+        <div className="menuShowcase">
+          <figure className="menuHeroPhoto">
+            <img src="./assets/gold-pig-set.jpg" alt={lang === "tc" ? "熟成豬肉、牛小排、泡菜鍋與配菜完整套餐" : "Complete set with aged pork, beef short rib, kimchi stew and sides"} />
+            <figcaption>{lang === "tc" ? "金豬食堂經典套餐實拍" : "Gold Pig signature set menu"}</figcaption>
+          </figure>
+          <div className="menuShowcaseCopy">
+            <p className="eyebrow">{c.menuKicker}</p>
+            <h2>{c.menuTitle}</h2>
+            <p className="menuIntro">{c.menuIntro}</p>
+            <div className="menuGroups">
+              {c.menuGroups.map((group) => (
+                <section className="menuGroup" key={group.no}>
+                  <header><span>{group.no}</span><h3>{group.label}</h3></header>
+                  <ul>{group.items.map((item) => <li key={item}>{item}</li>)}</ul>
+                </section>
+              ))}
+            </div>
+            <p className="menuPriceNote">{c.menuPriceNote}</p>
+            <small className="menuNote">{c.menuNote}</small>
+          </div>
+        </div>
+      </section>
 
       <section className="experienceSection sectionRule">
         <div className="experienceHeading">
@@ -666,13 +705,6 @@ export default function Home() {
           <p className="eyebrow">{c.aboutKicker}</p>
           <h2>{c.aboutTitle}</h2>
           <p>{c.aboutBody}</p>
-          <h3>{c.menuTitle}</h3>
-          <dl className="menuList">
-            <div><dt>01</dt><dd>{c.menuMeat}</dd></div>
-            <div><dt>02</dt><dd>{c.menuVeg}</dd></div>
-            <div><dt>03</dt><dd>{c.menuMain}</dd></div>
-          </dl>
-          <small className="menuNote">{c.menuNote}</small>
         </div>
       </section>
 
@@ -728,6 +760,10 @@ export default function Home() {
             );
           })}
         </div>
+        <aside className="packageMenuPreview">
+          <img src="./assets/gold-pig-set.jpg" alt="" />
+          <div><b>{c.menuTitle}</b><p>{c.menuPreview}</p><small>{c.menuNote}</small></div>
+        </aside>
         <div className="stickySummary">
           <div><span>{c.subtotal}</span><strong>{money(orderTotal)}</strong></div>
           <button className="primaryButton" disabled={!totalQty} onClick={() => navigate("checkout")}>{c.checkout}</button>
