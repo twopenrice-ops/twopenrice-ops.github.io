@@ -29,3 +29,11 @@ npm run build:pages
 ```
 
 推送至 `main` 後，GitHub Actions 會將 `pages-dist/` 的靜態版本發布至 GitHub Pages。
+
+## FTP package
+
+```bash
+npm run build:ftp
+```
+
+FTP 輸出位於 `2026-aml-or/`：首頁固定為 `index.html`，所有圖片位於 `images/`，JavaScript 與 CSS 位於 `static/`。整包可上傳到公司網域的任意子資料夾。

@@ -38,6 +38,7 @@ yarn-error.log*
 next-env.d.ts
 /dist/
 /pages-dist/
+/2026-aml-or/
 /.wrangler/
 /outputs/
 /work/
