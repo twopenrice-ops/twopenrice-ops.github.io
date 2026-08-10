@@ -380,6 +380,13 @@ export default function Home() {
     return () => window.removeEventListener("beforeunload", beforeUnload);
   }, [adminDirty]);
 
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [view]);
+
   const persist = (next: Database) => {
     setDb(next);
     try { window.localStorage.setItem(STORE_KEY, JSON.stringify(next)); } catch { /* demo fallback */ }
@@ -389,7 +396,6 @@ export default function Home() {
     if (view === "admin" && adminDirty && next !== "admin" && !window.confirm(c.leave)) return;
     setView(next);
     setErrors([]);
-    window.scrollTo({ top: 0, behavior: "auto" });
   };
 
   const toggleLang = () => {
@@ -758,7 +764,7 @@ export default function Home() {
     if (!session) return renderHome();
     const totalQty = cart.t4 + cart.t6;
     return (
-      <main className="subpage">
+      <main className="subpage packagePage">
         <button className="backLink" onClick={() => navigate("home")}>← {c.back}</button>
         <p className="eyebrow">02 / 04</p>
         <h1>{c.selectTitle}</h1>
