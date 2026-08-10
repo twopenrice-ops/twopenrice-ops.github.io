@@ -589,15 +589,15 @@ img { display: block; max-width: 100%; }
   font-weight: 800;
   font-size: 15px;
   cursor: pointer;
+  text-decoration: none;
   box-shadow: 0 12px 24px rgba(6,199,85,.2);
 }
 .lineButton:hover:not(:disabled) { background: #05b64d; transform: translateY(-1px); }
-.lineButton.connected { border-color: var(--teal); background: white; color: var(--teal); cursor: default; box-shadow: none; }
 .lineMark { padding: 4px 6px; border: 1px solid currentColor; border-radius: 5px; font-size: 10px; letter-spacing: .04em; }
 .lineHandoffAction { width: 100%; padding: 24px; border: 1px solid #d5e7db; background: white; box-shadow: 0 16px 36px rgba(20,73,42,.09); grid-column: 2; grid-row: 1 / 3; }
 .lineActionLabel { display: block; margin-bottom: 14px; color: #496154; font-size: 11px; letter-spacing: .12em; }
 .lineActionNote { display: block; margin-top: 12px; color: var(--muted); font-size: 11px; line-height: 1.55; text-align: center; }
-.lineConnectedHelp { margin: 12px 0 0; color: var(--teal); font-size: 13px; font-weight: 700; line-height: 1.55; text-align: center; }
+.lineUnavailable { margin: 0; padding: 15px; border-left: 3px solid #c48725; background: #fff8e8; color: #6f511d; font-size: 12px; line-height: 1.65; }
 
 .emptyState { padding: 34px 0; border-top: 1px solid var(--line); color: var(--muted); }
 

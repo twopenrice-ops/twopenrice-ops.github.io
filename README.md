@@ -11,9 +11,10 @@ OpenRice 為 Asia Miles 會員設計的金豬食堂台北活動頁 Demo。
 - 4 人桌、6 人桌及每單最多 2 桌
 - Asia Miles 會員資格與信用卡／Apple Pay 示意
 - 付款完成憑證
-- 訂位綁定 OpenRice LINE 的查詢／取消流程示意
+- 付款完成後產生一次性 LINE 綁定連結
+- 綁定至既有 OpenRice LINE CRM 後，可由 Bot 查詢訂位與提出取消申請
 
-目前沒有正式金流、會員驗證、獨立訂位資料庫或 LINE bot 串接，不會實際扣款。
+目前付款與 Asia Miles 會員檢核仍為 Demo，不會實際扣款。Demo 訂位會以 `is_demo` 標記寫入既有 LINE CRM 的 Supabase；正式金流上線時，應由付款成功 webhook 呼叫受 API Key 保護的正式訂位端點，並關閉 CRM 的 `GOLD_PIG_DEMO_MODE`。
 
 ## Local development
 

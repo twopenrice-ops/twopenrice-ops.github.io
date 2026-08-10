@@ -31,6 +31,8 @@ type Order = {
   aml: string;
   pay: PayMethod;
   createdAt: string;
+  lineBindUrl?: string;
+  lineSetupError?: boolean;
 };
 
 type Database = {
@@ -41,6 +43,7 @@ type Database = {
 
 const STORE_KEY = "goldpig_codex_demo_v1";
 const LANG_KEY = "goldpig_codex_lang";
+const LINE_CRM_ORIGIN = "https://openrice-line-crm.netlify.app";
 
 const makeDefaultData = (): Database => ({
   prices: { t4: 9120, t6: 13680 },
@@ -156,8 +159,7 @@ const COPY = {
     lineActionLabel: "訂位管理入口",
     lineActionNote: "約 10 秒完成｜不需下載 OpenRice App",
     lineButton: "立即綁定這筆訂位",
-    lineConnected: "已完成 LINE 綁定（示意）",
-    lineConnectedHelp: "之後請在 OpenRice LINE 輸入「查詢訂位」或「取消訂位」。",
+    lineUnavailable: "訂位已成立，但 LINE 綁定連結暫時無法產生。請保留訂位編號並聯絡 OpenRice 客服。",
     linePrivacy: "LINE 僅用於本次訂位管理與必要服務通知；你可以隨時關閉通知。",
     orderNo: "訂單編號",
     dining: "用餐場次",
@@ -294,8 +296,7 @@ const COPY = {
     lineActionLabel: "BOOKING MANAGEMENT",
     lineActionNote: "Takes about 10 seconds · No OpenRice app required",
     lineButton: "Link this booking now",
-    lineConnected: "LINE linked (demo)",
-    lineConnectedHelp: "In OpenRice LINE, type “View booking” or “Cancel booking”.",
+    lineUnavailable: "Your booking is confirmed, but the LINE link is temporarily unavailable. Keep your booking number and contact OpenRice support.",
     linePrivacy: "LINE is used only for this booking and essential service notices. You can turn notifications off at any time.",
     orderNo: "Order number",
     dining: "Seating",
@@ -355,7 +356,6 @@ export default function Home() {
   const [paying, setPaying] = useState(false);
   const payingRef = useRef(false);
   const [lastOrderNo, setLastOrderNo] = useState("");
-  const [lineConnected, setLineConnected] = useState(false);
   const [adminDraft, setAdminDraft] = useState<Database | null>(null);
   const [adminDirty, setAdminDirty] = useState(false);
   const [savedFlash, setSavedFlash] = useState(false);
@@ -467,7 +467,7 @@ export default function Home() {
 
     payingRef.current = true;
     setPaying(true);
-    window.setTimeout(() => {
+    window.setTimeout(async () => {
       let commit = db;
       try {
         const raw = window.localStorage.getItem(STORE_KEY);
@@ -484,7 +484,29 @@ export default function Home() {
       }
       commitSession.t4_sold += cart.t4;
       commitSession.t6_sold += cart.t6;
-      const no = `GP${String(Date.now()).slice(-8)}`;
+      let no = `GP${String(Date.now()).slice(-8)}`;
+      let lineBindUrl = "";
+      let lineSetupError = false;
+      try {
+        const response = await fetch(`${LINE_CRM_ORIGIN}/api/gold-pig/demo-bookings`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            date: commitSession.date,
+            time: commitSession.time,
+            tables4: cart.t4,
+            tables6: cart.t6,
+            totalAmount: cart.t4 * commit.prices.t4 + cart.t6 * commit.prices.t6,
+            paymentMethod: payMethod,
+          }),
+        });
+        const result = await response.json();
+        if (!response.ok || !result.ok || !result.booking?.bookingNo || !result.bindUrl) throw new Error("line_setup_failed");
+        no = result.booking.bookingNo;
+        lineBindUrl = result.bindUrl;
+      } catch {
+        lineSetupError = true;
+      }
       commit.orders.unshift({
         no,
         sessionId: commitSession.id,
@@ -499,10 +521,11 @@ export default function Home() {
         aml: form.aml.trim(),
         pay: payMethod as PayMethod,
         createdAt: new Date().toISOString(),
+        lineBindUrl,
+        lineSetupError,
       });
       persist(commit);
       setLastOrderNo(no);
-      setLineConnected(false);
       payingRef.current = false;
       setPaying(false);
       setView("done");
@@ -845,12 +868,15 @@ export default function Home() {
           </div>
           <div className="lineHandoffAction">
             <b className="lineActionLabel">{c.lineActionLabel}</b>
-            <button className={`lineButton ${lineConnected ? "connected" : ""}`} type="button" onClick={() => setLineConnected(true)} disabled={lineConnected}>
-              <span className="lineMark" aria-hidden="true">LINE</span>
-              {lineConnected ? c.lineConnected : c.lineButton}
-            </button>
-            {!lineConnected && <small className="lineActionNote">{c.lineActionNote}</small>}
-            {lineConnected && <p className="lineConnectedHelp" aria-live="polite">{c.lineConnectedHelp}</p>}
+            {lastOrder.lineBindUrl ? (
+              <a className="lineButton" href={lastOrder.lineBindUrl}>
+                <span className="lineMark" aria-hidden="true">LINE</span>
+                {c.lineButton}
+              </a>
+            ) : (
+              <p className="lineUnavailable" role="status">{c.lineUnavailable}</p>
+            )}
+            {lastOrder.lineBindUrl && <small className="lineActionNote">{c.lineActionNote}</small>}
           </div>
           <div className="lineHandoffDetails">
             <ul>{c.lineBenefits.map((item) => <li key={item}>{item}</li>)}</ul>
