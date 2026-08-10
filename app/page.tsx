@@ -838,6 +838,10 @@ export default function Home() {
                   <button type="button" className={payMethod === "apple" ? "selected" : ""} onClick={() => setPayMethod("apple")}><strong>{c.apple}</strong><small>{c.appleSub}</small></button>
                 </div>
               </section>
+              <div className="mobileCheckoutSubmit">
+                <div><span>{c.subtotal}</span><strong>{money(orderTotal)}</strong></div>
+                <button className="primaryButton" type="submit">{c.pay}</button>
+              </div>
             </div>
             <aside className="orderAside">
               <h2>{c.summary}</h2>

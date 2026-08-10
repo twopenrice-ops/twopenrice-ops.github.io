@@ -504,6 +504,7 @@ img { display: block; max-width: 100%; }
 .asideTotal { padding: 22px 0; display: flex; justify-content: space-between; align-items: end; }
 .asideTotal strong { color: var(--red); font-size: 23px; }
 .orderAside .primaryButton { width: 100%; }
+.mobileCheckoutSubmit { display: none; }
 
 .donePage { max-width: 900px; }
 .doneStatus {
@@ -685,6 +686,24 @@ img { display: block; max-width: 100%; }
   .packageRow .stepper { grid-column: 2; }
   .checkoutGrid { grid-template-columns: 1fr; gap: 20px; }
   .orderAside { position: static; grid-row: 1; }
+  .orderAside .primaryButton { display: none; }
+  .mobileCheckoutSubmit {
+    margin-top: -18px;
+    padding: 18px 0 calc(18px + env(safe-area-inset-bottom));
+    border-top: 2px solid var(--ink);
+    background: rgba(251,247,239,.97);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    position: sticky;
+    bottom: 0;
+    z-index: 12;
+  }
+  .mobileCheckoutSubmit div { flex: 0 0 auto; }
+  .mobileCheckoutSubmit span { display: block; color: var(--muted); font-size: 11px; }
+  .mobileCheckoutSubmit strong { display: block; margin-top: 3px; color: var(--red); font-size: 21px; }
+  .mobileCheckoutSubmit .primaryButton { flex: 1; min-width: 150px; }
   .lineHandoff { grid-template-columns: 1fr; gap: 24px; }
   .lineHandoffCopy, .lineHandoffDetails, .lineHandoffAction { grid-column: auto; grid-row: auto; }
 }
