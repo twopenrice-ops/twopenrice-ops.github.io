@@ -11,6 +11,7 @@
   --teal: #006564;
   --orange: #f15a22;
   --gold: #a58243;
+  --yellow: #ffd500;
   --white: #ffffff;
 }
 
@@ -56,67 +57,74 @@ img { display: block; max-width: 100%; }
   padding: 0;
   display: flex;
   align-items: center;
-  gap: 13px;
   cursor: pointer;
 }
-.brand b { color: #978b80; font-size: 13px; font-weight: 500; }
-.openrice { color: var(--orange); font-size: 20px; font-weight: 800; letter-spacing: -.04em; }
-.openrice small { margin-left: 2px; color: var(--ink); font-size: 10px; letter-spacing: 0; }
-.asia { color: var(--teal); font-size: 12px; font-weight: 800; letter-spacing: .14em; }
+.brandLockup { display: inline-flex; align-items: center; gap: 14px; }
+.brandLockup i { color: #8c837a; font-size: 14px; font-style: normal; }
+.asiaMilesLogo { width: 132px; height: 34px; object-fit: contain; }
+.openRiceLogo { width: 118px; height: 34px; object-fit: contain; }
+.brandLockup.compact { gap: 9px; }
+.brandLockup.compact .asiaMilesLogo { width: 92px; height: 24px; }
+.brandLockup.compact .openRiceLogo { width: 78px; height: 24px; }
+.brandLockup.compact i { font-size: 11px; }
 .siteHeader nav { display: flex; align-items: center; gap: 18px; }
 .siteHeader nav button { border: 0; background: none; padding: 8px 0; cursor: pointer; font-size: 13px; }
 .siteHeader nav button:hover { color: var(--red); }
 .siteHeader .langButton { border: 1px solid var(--line); padding: 7px 11px; min-width: 45px; }
 
-.campaignHero {
-  overflow: hidden;
-  border-bottom: 1px solid var(--line);
-  background: #e9ebea;
-}
-.campaignHero img {
-  width: 100%;
-  height: clamp(330px, 42vw, 640px);
-  object-fit: cover;
-  object-position: center;
-}
-.introShell, .sessionsSection, .storySection, .processSection, .noticeSection {
+.memberHero, .benefitSection, .sessionsSection, .storySection, .processSection, .noticeSection {
   width: min(1120px, calc(100% - 48px));
   margin: 0 auto;
 }
 .sectionRule { border-top: 1px solid var(--line); }
-.introShell {
-  padding: 78px 0 84px;
+.memberHero {
+  padding: 76px 0 68px;
   display: grid;
-  grid-template-columns: 1.35fr .75fr;
-  gap: 96px;
+  grid-template-columns: .95fr 1.05fr;
+  gap: 70px;
+  align-items: center;
 }
 .eyebrow {
   margin: 0 0 17px;
-  color: var(--red);
+  color: var(--teal);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: .18em;
 }
-.introCopy h1, .subpage > h1 {
+.memberHeroCopy h1, .subpage > h1 {
   margin: 0;
   font-family: "Songti TC", "Noto Serif TC", "PMingLiU", serif;
-  font-size: clamp(44px, 6.2vw, 76px);
+  font-size: clamp(44px, 6.1vw, 76px);
   font-weight: 700;
   letter-spacing: -.03em;
   line-height: 1.08;
 }
+.memberHeroPhoto { margin: 0; }
+.memberHeroPhoto img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+.memberHeroPhoto figcaption {
+  padding: 14px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 4px solid var(--yellow);
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+.memberHeroPhoto figcaption b { color: var(--ink); letter-spacing: 0; }
 .heroLead {
   max-width: 650px;
   margin: 26px 0 30px;
   font-size: 20px;
   line-height: 1.75;
 }
+.trustLine { margin: 22px 0 0; color: var(--teal); font-size: 12px; font-weight: 700; line-height: 1.6; }
 .heroActions { display: flex; align-items: center; gap: 24px; }
 .primaryButton, .secondaryButton {
   min-height: 48px;
   padding: 13px 24px;
-  border: 1px solid var(--red);
-  background: var(--red);
+  border: 1px solid var(--teal);
+  background: var(--teal);
   color: white;
   text-decoration: none;
   font-weight: 700;
@@ -127,7 +135,7 @@ img { display: block; max-width: 100%; }
   justify-content: center;
   cursor: pointer;
 }
-.primaryButton:hover { background: var(--red-dark); border-color: var(--red-dark); }
+.primaryButton:hover { background: #004b4a; border-color: #004b4a; }
 .primaryButton:disabled { background: #c7c0b6; border-color: #c7c0b6; cursor: not-allowed; }
 .secondaryButton { background: transparent; color: var(--ink); border-color: var(--ink); }
 .secondaryButton:hover { background: var(--ink); color: white; }
@@ -139,11 +147,36 @@ img { display: block; max-width: 100%; }
   cursor: pointer;
   font-size: 14px;
 }
-.eventFacts { margin: 0; border-top: 1px solid var(--ink); }
-.eventFacts div { padding: 18px 0 20px; border-bottom: 1px solid var(--line); }
-.eventFacts dt { margin-bottom: 7px; color: var(--red); font-size: 11px; font-weight: 800; letter-spacing: .14em; }
-.eventFacts dd { margin: 0; font-weight: 700; line-height: 1.55; }
-.eventFacts small { display: block; margin-top: 3px; color: var(--muted); font-weight: 400; }
+.factsStrip {
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1.25fr;
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.factsStrip div { min-height: 112px; padding: 22px 28px 20px 0; border-right: 1px solid var(--line); }
+.factsStrip div + div { padding-left: 28px; }
+.factsStrip div:last-child { border-right: 0; }
+.factsStrip dt { margin-bottom: 8px; color: var(--teal); font-size: 11px; font-weight: 800; letter-spacing: .12em; }
+.factsStrip dd { margin: 0; font-weight: 700; line-height: 1.5; }
+.factsStrip small { display: block; margin-top: 4px; color: var(--muted); font-weight: 400; }
+.benefitSection { padding: 92px 0 96px; }
+.benefitHeading { display: grid; grid-template-columns: .65fr 1.35fr; gap: 30px; align-items: start; margin-bottom: 44px; }
+.benefitHeading h2 {
+  margin: 0;
+  font-family: "Songti TC", "Noto Serif TC", "PMingLiU", serif;
+  font-size: clamp(34px, 4.2vw, 54px);
+  line-height: 1.16;
+}
+.benefitGrid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 2px solid var(--ink); }
+.benefitGrid article { min-height: 230px; padding: 24px 28px 26px 0; border-right: 1px solid var(--line); }
+.benefitGrid article + article { padding-left: 28px; }
+.benefitGrid article:last-child { border-right: 0; }
+.benefitGrid b { color: var(--teal); font-size: 11px; }
+.benefitGrid h3 { margin: 48px 0 12px; font-size: 20px; }
+.benefitGrid p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
+.serviceNote { margin: 24px 0 0; padding-left: 16px; border-left: 3px solid var(--yellow); color: var(--muted); font-size: 13px; line-height: 1.6; }
 
 .sessionsSection { padding: 90px 0 102px; }
 .sectionHeading { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; margin-bottom: 45px; }
@@ -305,11 +338,10 @@ img { display: block; max-width: 100%; }
 
 .donePage { max-width: 820px; }
 .ticket { margin: 40px 0 24px; border: 1px solid var(--ink); background: white; }
-.ticketHeader { padding: 22px 26px; background: var(--ink); color: white; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.ticketHeader { padding: 22px 26px; background: white; color: var(--ink); border-bottom: 3px solid var(--yellow); display: flex; justify-content: space-between; align-items: center; gap: 20px; }
 .ticketHeader small, .ticketHeader strong { display: block; }
-.ticketHeader small { margin-bottom: 4px; color: #cfc7bd; }
+.ticketHeader small { margin-bottom: 4px; color: var(--muted); }
 .ticketHeader strong { font-size: 23px; letter-spacing: .08em; }
-.ticketHeader > span { color: #d9d1c8; font-size: 12px; }
 .ticketBody { padding: 30px 26px; display: grid; grid-template-columns: 1fr 160px; gap: 36px; }
 .ticketBody dl { margin: 0; }
 .ticketBody dl div { display: grid; grid-template-columns: 115px 1fr; padding: 12px 0; border-bottom: 1px solid var(--line); }
@@ -347,15 +379,16 @@ img { display: block; max-width: 100%; }
 .siteFooter {
   min-height: 160px;
   padding: 38px max(24px, calc((100vw - 1120px) / 2));
-  background: var(--ink);
-  color: #eee8e0;
+  background: white;
+  color: var(--ink);
+  border-top: 1px solid var(--line);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
 }
-.footerBrand { display: block; margin-bottom: 12px; font-weight: 800; letter-spacing: .05em; }
-.siteFooter small { color: #aaa096; }
-.siteFooter button { border: 0; border-bottom: 1px solid #aaa096; background: none; padding: 3px 0; color: #c9c0b7; cursor: pointer; font-size: 12px; }
+.siteFooter .brandLockup { display: flex; margin-bottom: 14px; }
+.siteFooter small { display: block; max-width: 620px; color: var(--muted); line-height: 1.6; }
+.siteFooter button { border: 0; border-bottom: 1px solid var(--muted); background: none; padding: 3px 0; color: var(--muted); cursor: pointer; font-size: 12px; }
 
 .paymentOverlay { position: fixed; inset: 0; z-index: 100; background: rgba(45,36,28,.84); display: grid; place-items: center; color: white; }
 .paymentOverlay > div { width: min(360px, calc(100% - 40px)); padding: 34px; border-top: 3px solid var(--red); background: var(--ink); text-align: center; }
@@ -369,12 +402,18 @@ img { display: block; max-width: 100%; }
   .siteHeader { height: 60px; padding: 0 18px; }
   .siteHeader nav { gap: 12px; }
   .siteHeader nav button:first-child { display: none; }
-  .openrice { font-size: 18px; }
-  .asia { font-size: 10px; }
-  .campaignHero img { height: 420px; object-position: 37% center; }
-  .introShell, .sessionsSection, .storySection, .processSection, .noticeSection { width: min(100% - 36px, 680px); }
-  .introShell { grid-template-columns: 1fr; gap: 48px; padding: 58px 0 68px; }
-  .introCopy h1 { font-size: 47px; }
+  .asiaMilesLogo { width: 112px; }
+  .openRiceLogo { width: 98px; }
+  .memberHero, .benefitSection, .sessionsSection, .storySection, .processSection, .noticeSection { width: min(100% - 36px, 680px); }
+  .memberHero { grid-template-columns: 1fr; gap: 42px; padding: 58px 0 56px; }
+  .memberHeroCopy h1 { font-size: 50px; }
+  .factsStrip { width: min(100% - 36px, 680px); grid-template-columns: 1fr; }
+  .factsStrip div, .factsStrip div + div { min-height: 0; padding: 18px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .factsStrip div:last-child { border-bottom: 0; }
+  .benefitHeading { grid-template-columns: 1fr; gap: 8px; }
+  .benefitGrid { grid-template-columns: 1fr; }
+  .benefitGrid article, .benefitGrid article + article { min-height: 0; padding: 22px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .benefitGrid h3 { margin: 28px 0 10px; }
   .heroLead { font-size: 18px; }
   .sectionHeading { grid-template-columns: 1fr; gap: 16px; }
   .sectionHeading .eyebrow { grid-column: auto; }
@@ -398,12 +437,15 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 560px) {
   .demoBar { padding: 5px 12px; font-size: 9px; }
-  .brand { gap: 8px; }
-  .brand b, .openrice small { display: none; }
-  .campaignHero img { height: 310px; object-position: 35% center; }
-  .introShell, .sessionsSection, .storySection, .processSection, .noticeSection { width: calc(100% - 32px); }
-  .introShell { padding: 45px 0 56px; }
-  .introCopy h1, .subpage > h1 { font-size: 39px; }
+  .brandLockup { gap: 8px; }
+  .siteHeader .asiaMilesLogo { width: 88px; height: 26px; }
+  .siteHeader .openRiceLogo { width: 72px; height: 26px; }
+  .memberHero, .benefitSection, .sessionsSection, .storySection, .processSection, .noticeSection { width: calc(100% - 32px); }
+  .memberHero { padding: 45px 0 46px; }
+  .memberHeroCopy h1, .subpage > h1 { font-size: 39px; }
+  .memberHeroPhoto figcaption { display: block; }
+  .memberHeroPhoto figcaption b { display: block; margin-top: 5px; }
+  .factsStrip { width: calc(100% - 32px); }
   .heroLead { font-size: 16px; line-height: 1.7; }
   .heroActions { gap: 18px; }
   .sessionsSection, .storySection, .processSection, .noticeSection { padding-top: 68px; padding-bottom: 74px; }
@@ -433,7 +475,7 @@ img { display: block; max-width: 100%; }
   .verifyRow button { width: 100%; margin-top: 10px; }
   .paymentOptions { grid-template-columns: 1fr; }
   .ticketHeader { align-items: flex-start; }
-  .ticketHeader > span { max-width: 100px; text-align: right; }
+  .ticketHeader .brandLockup { display: none; }
   .ticketBody { grid-template-columns: 1fr; }
   .ticketBody dl div { grid-template-columns: 95px 1fr; }
   .proof { padding-top: 8px; }

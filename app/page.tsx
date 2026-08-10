@@ -58,10 +58,11 @@ const COPY = {
     demo: "功能展示 DEMO｜不會進行實際扣款",
     orders: "我的訂單",
     lang: "EN",
-    heroEyebrow: "OPENRICE × ASIA MILES｜PRIVATE DINING",
-    heroTitle: "金豬食堂包場之夜",
-    heroLead: "首爾排隊名店，這次不用搶 App。選好場次與桌型，線上付款就完成訂位。",
-    book: "查看場次",
+    heroEyebrow: "ASIA MILES 會員限定｜台北包場",
+    heroTitle: "不用飛首爾，也不用排兩小時。",
+    heroLead: "Asia Miles 為會員保留金豬食堂台北包場席次。四個週五晚上，選好桌型並付款，這張難訂的桌就為你留下。",
+    trustLine: "免下載 App・免註冊 OpenRice 帳號・付款完成即保留桌位",
+    book: "選擇包場場次",
     lookup: "查訂單",
     venueLabel: "地點",
     venue: "金豬食堂 台北旗艦店",
@@ -71,8 +72,8 @@ const COPY = {
     priceLabel: "套餐",
     price: "4 人桌 NT$9,120｜6 人桌 NT$13,680",
     sessionKicker: "RESERVATION",
-    sessionTitle: "選一個晚上",
-    sessionIntro: "每場皆為完整包場。桌數會隨示範訂單即時更新，每筆訂單最多選 2 桌。",
+    sessionTitle: "先選一個想赴約的晚上",
+    sessionIntro: "每場都是 Asia Miles 會員專屬包場。桌數售完即止；每筆訂單最多選 2 桌，可混搭 4 人與 6 人桌。",
     four: "4 人桌",
     six: "6 人桌",
     remaining: "剩餘",
@@ -83,15 +84,22 @@ const COPY = {
     almost: "即將售完",
     available: "可預訂",
     aboutKicker: "THE RESTAURANT",
-    aboutTitle: "為了一口熟成豬肉，首爾人願意排兩小時。",
-    aboutBody: "金豬食堂由主廚朴受泫創立，以厚切熟成豬肉聞名，連續多年獲《米其林指南》必比登推薦並名列 50 Best Discovery。台北店開放訂位後場場秒殺；這次由 OpenRice 與亞洲萬里通包下整晚，並由專人桌邊代烤。",
+    aboutTitle: "這不是一般訂位，是整晚為會員保留的金豬食堂。",
+    aboutBody: "金豬食堂以厚切熟成豬肉、專人桌邊代烤聞名，連續多年獲《米其林指南》必比登推薦並名列 50 Best Discovery。這次不用現場候位，也不用和一般訂位名額競速；Asia Miles 直接為會員保留完整包場席次。",
+    benefitTitle: "你得到的不只是有位",
+    benefits: [
+      { no: "01", title: "會員專屬席次", body: "一般客人無法購買的完整包場，只有符合資格的 Asia Miles 會員能完成結帳。" },
+      { no: "02", title: "套餐一次到位", body: "招牌熟成豬肉、帶骨牛小排、泡菜鍋與主食都已安排，價格包含 10% 服務費。" },
+      { no: "03", title: "不用研究 OpenRice", body: "不需下載 App、不需建立 OpenRice 帳號；用 Asia Miles 會員號碼確認資格即可。" },
+    ],
+    serviceBy: "OpenRice 是本活動指定的線上訂位與付款服務平台。你不需要是 OpenRice 會員。",
     menuTitle: "這桌會吃到",
     menuMeat: "熟成豚梅花、帶骨熟成豚五花、熟成豚松阪、熟成豚霜降、特級帶骨牛小排",
     menuVeg: "季節生菜、金豬特選羅勒、杏鮑菇、大蒜與大蔥",
     menuMain: "金豬經典泡菜鍋、韓國農心 Q 拉麵、越光米飯",
     menuNote: "實際品項依現場提供為準，恕不接受客製調整。",
-    howTitle: "四步完成，不用下載 App",
-    steps: ["選場次", "選桌型", "填資料並付款", "收到購買證明"],
+    howTitle: "從選日期到完成，四步就好",
+    steps: ["選包場日期", "選 4 人或 6 人桌", "以會員號碼確認資格並付款", "Email 收到購買證明"],
     noticeTitle: "訂位前先看",
     noticeGroups: [
       { title: "報到方式", items: ["請於場次前 15 分鐘抵達餐廳。", "向服務人員表示為亞洲萬里通訂位貴賓，並出示會員卡及訂位確認。", "無法出示訂位確認者，恕無法入座、退款或改期。"] },
@@ -105,17 +113,17 @@ const COPY = {
     checkout: "前往結帳",
     back: "返回",
     checkoutTitle: "結帳",
-    checkoutSub: "免註冊。填寫聯絡資料並完成資格檢核即可付款。",
+    checkoutSub: "不需 OpenRice 帳號。填寫聯絡資料，以 Asia Miles 會員號碼確認活動資格後即可付款。",
     contact: "聯絡資料",
     name: "姓名",
     phone: "手機號碼",
     email: "電子郵件",
-    member: "國泰會員資格",
-    memberNo: "國泰會員號碼",
+    member: "Asia Miles 會員資格",
+    memberNo: "Asia Miles 會員號碼",
     verify: "檢核資格",
     verifying: "檢核中",
     verified: "資格已確認（示意）",
-    verifyHelp: "正式版會在這一步即時確認聯名卡資格。",
+    verifyHelp: "輸入你的會員號碼。正式活動會在這一步確認會員及聯名卡活動資格。",
     payment: "付款方式",
     card: "信用卡",
     cardSub: "VISA / Mastercard / JCB",
@@ -174,10 +182,11 @@ const COPY = {
     demo: "FUNCTIONAL DEMO | No real payment will be charged",
     orders: "My orders",
     lang: "中文",
-    heroEyebrow: "OPENRICE × ASIA MILES | PRIVATE DINING",
-    heroTitle: "Gold Pig Private Dining",
-    heroLead: "Seoul’s hard-to-book barbecue house, reserved for the night. Pick a seating and table size, then pay online to confirm.",
-    book: "View seatings",
+    heroEyebrow: "EXCLUSIVE TO ASIA MILES MEMBERS | TAIPEI",
+    heroTitle: "Skip the flight. Skip the two-hour queue.",
+    heroLead: "Asia Miles has reserved Gold Pig Taipei for four Friday evenings. Choose a table and pay online — one of the city’s hardest bookings is yours.",
+    trustLine: "No app download · No OpenRice account · Your table is held after payment",
+    book: "Choose a private seating",
     lookup: "Find an order",
     venueLabel: "Venue",
     venue: "Gold Pig, Taipei Flagship",
@@ -187,8 +196,8 @@ const COPY = {
     priceLabel: "Set menu",
     price: "Table for 4 NT$9,120 | Table for 6 NT$13,680",
     sessionKicker: "RESERVATION",
-    sessionTitle: "Choose your night",
-    sessionIntro: "Each seating is a full private buyout. Availability updates with demo orders. Up to two tables per order.",
+    sessionTitle: "Choose the night that works for you",
+    sessionIntro: "Every date is an Asia Miles members-only buyout. Tables sell out in real time. Mix tables for 4 and 6, up to two per order.",
     four: "Table for 4",
     six: "Table for 6",
     remaining: "Left",
@@ -199,15 +208,22 @@ const COPY = {
     almost: "Almost full",
     available: "Available",
     aboutKicker: "THE RESTAURANT",
-    aboutTitle: "The aged pork Seoul diners wait hours for.",
-    aboutBody: "Chef Park Su-hyun’s Gold Pig is known for thick-cut aged pork, with years of Michelin Bib Gourmand recognition and a place on 50 Best Discovery. OpenRice and Asia Miles have reserved the Taipei restaurant for an entire evening, with staff grilling at every table.",
+    aboutTitle: "This is not a regular reservation. The restaurant is yours for the night.",
+    aboutBody: "Gold Pig is known for thick-cut aged pork and expert tableside grilling, with years of Michelin Bib Gourmand recognition and a place on 50 Best Discovery. There is no walk-in queue and no race for public bookings — Asia Miles has set aside the full seating for eligible members.",
+    benefitTitle: "More than simply getting a table",
+    benefits: [
+      { no: "01", title: "Members-only access", body: "A full private seating not available to the public. Only eligible Asia Miles members can complete checkout." },
+      { no: "02", title: "The menu is handled", body: "Signature aged pork, bone-in beef short rib, kimchi stew and staples, with the 10% service charge included." },
+      { no: "03", title: "No OpenRice learning curve", body: "No app or OpenRice account is required. Use your Asia Miles membership number to verify eligibility." },
+    ],
+    serviceBy: "OpenRice is the appointed booking and payment provider for this event. You do not need an OpenRice account.",
     menuTitle: "On the table",
     menuMeat: "Four aged pork cuts and premium bone-in beef short rib",
     menuVeg: "Seasonal greens, Gold Pig basil, mushrooms, garlic and spring onion",
     menuMain: "Gold Pig kimchi stew, Nongshim Q noodles and Koshihikari rice",
     menuNote: "Items may vary on the day. Menu changes are not available.",
-    howTitle: "Four steps. No app required.",
-    steps: ["Pick a seating", "Choose table size", "Enter details and pay", "Receive proof of purchase"],
+    howTitle: "Four clear steps from date to confirmation",
+    steps: ["Pick a private dining date", "Choose a table for 4 or 6", "Verify membership and pay", "Receive proof of purchase by email"],
     noticeTitle: "Before you book",
     noticeGroups: [
       { title: "Check-in", items: ["Arrive 15 minutes before your seating.", "Tell staff you are an Asia Miles guest and show your membership card and booking confirmation.", "Guests without confirmation cannot be admitted, refunded or moved."] },
@@ -221,17 +237,17 @@ const COPY = {
     checkout: "Continue to checkout",
     back: "Back",
     checkoutTitle: "Checkout",
-    checkoutSub: "No account required. Enter your contact details and verify eligibility to pay.",
+    checkoutSub: "No OpenRice account is required. Enter your details and verify with your Asia Miles membership number to pay.",
     contact: "Contact details",
     name: "Name",
     phone: "Mobile number",
     email: "Email",
-    member: "Cathay membership eligibility",
-    memberNo: "Cathay membership number",
+    member: "Asia Miles member eligibility",
+    memberNo: "Asia Miles membership number",
     verify: "Verify",
     verifying: "Verifying",
     verified: "Eligibility confirmed (demo)",
-    verifyHelp: "The live site will check co-branded card eligibility at this step.",
+    verifyHelp: "Enter your membership number. The live event will check member and co-branded card campaign eligibility here.",
     payment: "Payment method",
     card: "Credit card",
     cardSub: "VISA / Mastercard / JCB",
@@ -534,11 +550,19 @@ export default function Home() {
     order.t6 ? `${c.six} × ${order.t6}` : "",
   ].filter(Boolean).join(lang === "tc" ? "、" : ", ");
 
+  const BrandLockup = ({ compact = false }: { compact?: boolean }) => (
+    <span className={`brandLockup ${compact ? "compact" : ""}`} aria-label="Asia Miles and OpenRice">
+      <img className="asiaMilesLogo" src="/assets/asia-miles-logo.png" alt="Asia Miles" />
+      <i aria-hidden="true">×</i>
+      <img className="openRiceLogo" src="/assets/openrice-logo.svg" alt="OpenRice 開飯喇" />
+    </span>
+  );
+
   const Ticket = ({ order }: { order: Order }) => (
     <article className="ticket">
       <div className="ticketHeader">
         <div><small>{c.orderNo}</small><strong>{order.no}</strong></div>
-        <span>OpenRice × Asia Miles</span>
+        <BrandLockup compact />
       </div>
       <div className="ticketBody">
         <dl>
@@ -558,9 +582,7 @@ export default function Home() {
       <div className="demoBar">{c.demo}</div>
       <header className="siteHeader">
         <button className="brand" onClick={() => navigate("home")} aria-label="OpenRice event home">
-          <span className="openrice">OpenRice<small>開飯喇</small></span>
-          <b>×</b>
-          <span className="asia">ASIA MILES</span>
+          <BrandLockup />
         </button>
         <nav>
           <button onClick={() => navigate("orders")}>{c.orders}</button>
@@ -572,12 +594,8 @@ export default function Home() {
 
   const HomeView = () => (
     <main>
-      <section className="campaignHero">
-        <img src="/assets/gold-pig-hero.jpg" alt={lang === "tc" ? "國泰航空味覺巡里金豬食堂活動主視覺" : "Cathay Taste Journey at Gold Pig"} />
-      </section>
-
-      <section className="introShell sectionRule">
-        <div className="introCopy">
+      <section className="memberHero">
+        <div className="memberHeroCopy">
           <p className="eyebrow">{c.heroEyebrow}</p>
           <h1>{c.heroTitle}</h1>
           <p className="heroLead">{c.heroLead}</p>
@@ -585,12 +603,24 @@ export default function Home() {
             <a className="primaryButton" href="#sessions">{c.book}</a>
             <button className="textButton" onClick={() => navigate("orders")}>{c.lookup}</button>
           </div>
+          <p className="trustLine">{c.trustLine}</p>
         </div>
-        <dl className="eventFacts">
-          <div><dt>{c.venueLabel}</dt><dd>{c.venue}<small>{c.address}</small></dd></div>
-          <div><dt>{c.timeLabel}</dt><dd>{c.time}</dd></div>
-          <div><dt>{c.priceLabel}</dt><dd>{c.price}</dd></div>
-        </dl>
+        <figure className="memberHeroPhoto">
+          <img src="/assets/gold-pig-grill.jpg" alt={lang === "tc" ? "金豬食堂專人桌邊燒烤" : "Gold Pig tableside grilling"} />
+          <figcaption><span>GOLD PIG TAIPEI</span><b>{lang === "tc" ? "專人桌邊代烤" : "Expert tableside grilling"}</b></figcaption>
+        </figure>
+      </section>
+
+      <dl className="factsStrip">
+        <div><dt>{c.venueLabel}</dt><dd>{c.venue}<small>{c.address}</small></dd></div>
+        <div><dt>{c.timeLabel}</dt><dd>{c.time}</dd></div>
+        <div><dt>{c.priceLabel}</dt><dd>{c.price}</dd></div>
+      </dl>
+
+      <section className="benefitSection sectionRule">
+        <div className="benefitHeading"><p className="eyebrow">MEMBERS ONLY</p><h2>{c.benefitTitle}</h2></div>
+        <div className="benefitGrid">{c.benefits.map((benefit) => <article key={benefit.no}><b>{benefit.no}</b><h3>{benefit.title}</h3><p>{benefit.body}</p></article>)}</div>
+        <p className="serviceNote">{c.serviceBy}</p>
       </section>
 
       <section className="sessionsSection" id="sessions">
@@ -618,7 +648,7 @@ export default function Home() {
       </section>
 
       <section className="storySection sectionRule">
-        <div className="storyImage"><img src="/assets/gold-pig-set.jpg" alt={lang === "tc" ? "金豬食堂熟成肉套餐" : "Gold Pig aged meat set"} /></div>
+        <div className="storyImage"><img src="/assets/gold-pig-taipei-building.jpg" alt={lang === "tc" ? "金豬食堂台北旗艦店外觀" : "Gold Pig Taipei flagship"} /></div>
         <div className="storyCopy">
           <p className="eyebrow">{c.aboutKicker}</p>
           <h2>{c.aboutTitle}</h2>
@@ -669,7 +699,7 @@ export default function Home() {
             const stock = remaining(session, key);
             return (
               <article className={`packageRow ${qty ? "selected" : ""}`} key={key}>
-                <img src="/assets/gold-pig-set.jpg" alt="" />
+                <img src="/assets/gold-pig-grill.jpg" alt="" />
                 <div className="packageCopy">
                   <h2>{isFour ? c.four : c.six}</h2>
                   <strong>{money(db.prices[key])}</strong>
@@ -825,7 +855,7 @@ export default function Home() {
       {view === "orders" && <OrdersView />}
       {view === "admin" && <AdminView />}
       <footer className="siteFooter">
-        <div><span className="footerBrand">OpenRice × Asia Miles</span><small>Copyright © OpenRice Group Inc.｜DEMO</small></div>
+        <div><BrandLockup /><small>{c.serviceBy}<br />Copyright © OpenRice Group Inc.｜DEMO</small></div>
         <button onClick={startAdmin}>{c.admin}</button>
       </footer>
       {paying && <div className="paymentOverlay" role="status"><div><strong>{c.processing}</strong><span>{c.processingSub}</span><i /></div></div>}
