@@ -7,8 +7,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const host = requestHeaders.get("host") || "localhost:3000";
   const protocol = host.startsWith("localhost") ? "http" : "https";
   const image = `${protocol}://${host}/og.png`;
-  const title = "Asia Miles 會員限定｜金豬食堂台北包場";
-  const description = "不用飛首爾，也不用排兩小時。四個週五晚上，Asia Miles 為會員保留金豬食堂台北包場席次。";
+  const title = "Asia Miles 會員限定｜金豬食堂 OpenRice 專屬保留位";
+  const description = "首爾一位難求，今晚為你留位。OpenRice 為 Asia Miles 會員保留四個週五晚間席次。";
   return {
     title,
     description,
