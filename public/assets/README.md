@@ -1,7 +1,8 @@
 The event assets in this folder are used for the functional partnership demo.
 
 - `gold-pig-hero.jpg`: original `images/br_01.jpg`
-- `gold-pig-set.jpg`: legacy low-resolution `images/111.jpg` (no longer used)
+- `gold-pig-set.jpg`: 2400 × 1800 compatibility copy for visitors holding an older cached bundle
+- `gold-pig-set-legacy-360x220.jpg`: archived original `images/111.jpg` (never served by the page)
 - `brand-curve.png`: original `images/ci/CI_1920.png`
 - `openrice-logo.svg`: official OpenRice brand asset already used in the workspace
 - `asia-miles-logo.png`: original Asia Miles wordmark obtained from the public Seeklogo brand asset page
