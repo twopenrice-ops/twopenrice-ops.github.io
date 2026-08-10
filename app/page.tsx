@@ -551,9 +551,9 @@ export default function Home() {
 
   const BrandLockup = ({ compact = false }: { compact?: boolean }) => (
     <span className={`brandLockup ${compact ? "compact" : ""}`} aria-label="Asia Miles and OpenRice">
-      <img className="asiaMilesLogo" src="/assets/asia-miles-logo.png" alt="Asia Miles" />
+      <img className="asiaMilesLogo" src="./assets/asia-miles-logo.png" alt="Asia Miles" />
       <i aria-hidden="true">×</i>
-      <img className="openRiceLogo" src="/assets/openrice-logo.svg" alt="OpenRice 開飯喇" />
+      <img className="openRiceLogo" src="./assets/openrice-logo.svg" alt="OpenRice 開飯喇" />
     </span>
   );
 
@@ -593,7 +593,7 @@ export default function Home() {
   const HomeView = () => (
     <main>
       <section className="campaignMasthead" aria-label={lang === "tc" ? "金豬食堂活動主視覺" : "Gold Pig campaign visual"}>
-        <img src="/assets/gold-pig-hero.jpg" alt={lang === "tc" ? "國泰航空服務人員與金豬食堂活動主視覺" : "Cathay service ambassador with the Gold Pig campaign"} />
+        <img src="./assets/gold-pig-hero.jpg" alt={lang === "tc" ? "國泰航空服務人員與金豬食堂活動主視覺" : "Cathay service ambassador with the Gold Pig campaign"} />
       </section>
 
       <section className="memberHero">
@@ -607,7 +607,7 @@ export default function Home() {
           <p className="trustLine">{c.trustLine}</p>
         </div>
         <figure className="memberHeroPhoto">
-          <img src="/assets/gold-pig-interior-crop.jpg" alt={lang === "tc" ? "金豬食堂台北店用餐空間" : "Gold Pig Taipei dining room"} />
+          <img src="./assets/gold-pig-interior-crop.jpg" alt={lang === "tc" ? "金豬食堂台北店用餐空間" : "Gold Pig Taipei dining room"} />
           <figcaption><span>GOLD PIG TAIPEI</span><b>{lang === "tc" ? "台北旗艦店實景" : "Taipei flagship"}</b></figcaption>
         </figure>
       </section>
@@ -624,9 +624,9 @@ export default function Home() {
           <h2>{c.experienceTitle}</h2>
         </div>
         <div className="photoMosaic">
-          <figure className="photoMosaicLead"><img src="/assets/gold-pig-meat-prep.jpg" alt={c.experienceCaptions[0]} /><figcaption>{c.experienceCaptions[0]}</figcaption></figure>
-          <figure><img src="/assets/gold-pig-grill.jpg" alt={c.experienceCaptions[1]} /><figcaption>{c.experienceCaptions[1]}</figcaption></figure>
-          <figure><img src="/assets/gold-pig-chefs.jpg" alt={c.experienceCaptions[2]} /><figcaption>{c.experienceCaptions[2]}</figcaption></figure>
+          <figure className="photoMosaicLead"><img src="./assets/gold-pig-meat-prep.jpg" alt={c.experienceCaptions[0]} /><figcaption>{c.experienceCaptions[0]}</figcaption></figure>
+          <figure><img src="./assets/gold-pig-grill.jpg" alt={c.experienceCaptions[1]} /><figcaption>{c.experienceCaptions[1]}</figcaption></figure>
+          <figure><img src="./assets/gold-pig-chefs.jpg" alt={c.experienceCaptions[2]} /><figcaption>{c.experienceCaptions[2]}</figcaption></figure>
         </div>
       </section>
 
@@ -661,7 +661,7 @@ export default function Home() {
       </section>
 
       <section className="storySection sectionRule">
-        <div className="storyImage"><img src="/assets/gold-pig-taipei-building.jpg" alt={lang === "tc" ? "金豬食堂台北旗艦店外觀" : "Gold Pig Taipei flagship"} /></div>
+        <div className="storyImage"><img src="./assets/gold-pig-taipei-building.jpg" alt={lang === "tc" ? "金豬食堂台北旗艦店外觀" : "Gold Pig Taipei flagship"} /></div>
         <div className="storyCopy">
           <p className="eyebrow">{c.aboutKicker}</p>
           <h2>{c.aboutTitle}</h2>
@@ -712,7 +712,7 @@ export default function Home() {
             const stock = remaining(session, key);
             return (
               <article className={`packageRow ${qty ? "selected" : ""}`} key={key}>
-                <img src={isFour ? "/assets/gold-pig-meat-prep.jpg" : "/assets/gold-pig-grill.jpg"} alt="" />
+                <img src={isFour ? "./assets/gold-pig-meat-prep.jpg" : "./assets/gold-pig-grill.jpg"} alt="" />
                 <div className="packageCopy">
                   <h2>{isFour ? c.four : c.six}</h2>
                   <strong>{money(db.prices[key])}</strong>
@@ -870,7 +870,6 @@ export default function Home() {
       {view === "admin" && <AdminView />}
       <footer className="siteFooter">
         <div><BrandLockup /><small>{c.serviceBy}<br />Copyright © OpenRice Group Inc.｜DEMO</small></div>
-        <button onClick={startAdmin}>{c.admin}</button>
       </footer>
       {paying && <div className="paymentOverlay" role="status"><div><strong>{c.processing}</strong><span>{c.processingSub}</span><i /></div></div>}
     </div>
