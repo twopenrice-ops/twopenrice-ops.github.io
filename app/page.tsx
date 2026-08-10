@@ -146,23 +146,28 @@ const COPY = {
     needVerify: "請先完成國泰會員資格檢核。",
     needPay: "請選擇付款方式。",
     noStock: "很抱歉，桌數剛被其他訂單買走，請重新選擇。",
-    doneTitle: "訂位完成",
-    doneSub: "訂位確認已寄到你的電子郵件（示意）。請接著將這筆訂位綁定至 OpenRice LINE，之後的查詢與取消都從 LINE 辦理。",
-    lineEyebrow: "下一步｜綁定 OPENRICE LINE",
-    lineTitle: "將這筆訂位綁定到 LINE",
-    lineBody: "按下後會開啟 OpenRice LINE 官方帳號並帶入這筆訂位編號。完成綁定後，LINE bot 就是你的訂位管理入口：",
-    lineBenefits: ["查詢訂位資料與電子憑證", "依活動規則提出取消申請", "接收行前提醒、地址導航與臨時異動通知"],
-    lineButton: "綁定訂位到 LINE",
-    lineConnected: "訂位已綁定 LINE（示意）",
-    lineConnectedHelp: "之後可直接在 LINE 輸入「查詢訂位」或「取消訂位」。",
-    linePrivacy: "LINE bot 僅依訂位編號處理這筆訂位與相關餐飲服務訊息，可隨時取消接收。",
+    doneStatus: "付款成功",
+    doneTitle: "訂位已成立",
+    doneSub: "確認信已寄至你的電子郵件（示意）。下一步請先綁定 OpenRice LINE；之後的查詢、取消申請與提醒都會在 LINE 辦理。",
+    lineEyebrow: "下一步｜管理這筆訂位",
+    lineTitle: "現在綁定 OpenRice LINE",
+    lineBody: "此活動頁不提供網站查單。綁定後，可直接在 OpenRice LINE 查詢訂位、提出取消申請並接收通知。",
+    lineBenefits: ["隨時查詢訂位編號、日期與桌型", "依活動規則提出取消申請", "接收用餐提醒、地址導航與臨時異動"],
+    lineActionLabel: "訂位管理入口",
+    lineActionNote: "約 10 秒完成｜不需下載 OpenRice App",
+    lineButton: "立即綁定這筆訂位",
+    lineConnected: "已完成 LINE 綁定（示意）",
+    lineConnectedHelp: "之後請在 OpenRice LINE 輸入「查詢訂位」或「取消訂位」。",
+    linePrivacy: "LINE 僅用於本次訂位管理與必要服務通知；你可以隨時關閉通知。",
     orderNo: "訂單編號",
     dining: "用餐場次",
     items: "訂購內容",
     diner: "訂位人",
     paidBy: "付款方式",
     total: "實付金額",
-    proof: "購買證明｜DEMO",
+    bookingStatusLabel: "訂位狀態",
+    bookingStatus: "已付款・已成立",
+    arrivalProof: "用餐當日請出示訂位編號與 Asia Miles 會員卡。",
     home: "回活動首頁",
     admin: "場次管理",
     adminSub: "展示用後台。修改後按儲存，活動頁才會更新。",
@@ -279,23 +284,28 @@ const COPY = {
     needVerify: "Verify your Cathay membership eligibility.",
     needPay: "Choose a payment method.",
     noStock: "Those tables were just taken. Please choose again.",
-    doneTitle: "Booking confirmed",
-    doneSub: "Your booking confirmation has been emailed (demo). Now link this booking to OpenRice LINE; future enquiries and cancellations will be handled there.",
-    lineEyebrow: "NEXT｜LINK OPENRICE LINE",
-    lineTitle: "Link this booking to LINE",
-    lineBody: "The button opens the OpenRice LINE Official Account with this booking number. Once linked, the LINE bot becomes your booking management channel:",
-    lineBenefits: ["View booking details and the digital confirmation", "Request cancellation under the event policy", "Receive reminders, directions and important service updates"],
-    lineButton: "Link booking to LINE",
-    lineConnected: "Booking linked to LINE (demo)",
-    lineConnectedHelp: "You can now type “View booking” or “Cancel booking” in LINE.",
-    linePrivacy: "The LINE bot uses the booking number only to manage this booking and related dining service messages. You may opt out at any time.",
+    doneStatus: "Payment successful",
+    doneTitle: "Your booking is confirmed",
+    doneSub: "A confirmation has been emailed to you (demo). Next, link OpenRice LINE for future booking enquiries, cancellation requests and reminders.",
+    lineEyebrow: "NEXT｜MANAGE THIS BOOKING",
+    lineTitle: "Link OpenRice LINE now",
+    lineBody: "This campaign page does not provide online order lookup. Link LINE to view this booking, request cancellation and receive updates.",
+    lineBenefits: ["View the booking number, date and table size anytime", "Request cancellation under the event policy", "Receive reminders, directions and important updates"],
+    lineActionLabel: "BOOKING MANAGEMENT",
+    lineActionNote: "Takes about 10 seconds · No OpenRice app required",
+    lineButton: "Link this booking now",
+    lineConnected: "LINE linked (demo)",
+    lineConnectedHelp: "In OpenRice LINE, type “View booking” or “Cancel booking”.",
+    linePrivacy: "LINE is used only for this booking and essential service notices. You can turn notifications off at any time.",
     orderNo: "Order number",
     dining: "Seating",
     items: "Items",
     diner: "Guest",
     paidBy: "Paid with",
     total: "Total paid",
-    proof: "PROOF OF PURCHASE | DEMO",
+    bookingStatusLabel: "Booking status",
+    bookingStatus: "Paid · Confirmed",
+    arrivalProof: "Show your booking number and Asia Miles membership card on arrival.",
     home: "Event home",
     admin: "Session manager",
     adminSub: "Demo organizer view. Changes only go live after you save.",
@@ -330,17 +340,6 @@ function money(value: number) {
 
 function remaining(session: Session, key: "t4" | "t6") {
   return Math.max(0, session[`${key}_total`] - session[`${key}_sold`]);
-}
-
-function QRMock({ value }: { value: string }) {
-  const seed = value.split("").reduce((sum, char) => sum + char.charCodeAt(0), 0);
-  const cells = Array.from({ length: 225 }, (_, i) => {
-    const row = Math.floor(i / 15);
-    const col = i % 15;
-    const finder = (row < 5 && col < 5) || (row < 5 && col > 9) || (row > 9 && col < 5);
-    return finder || ((i * 17 + seed * 7 + row * col) % 11 < 5);
-  });
-  return <div className="qr" aria-label="Demo QR code">{cells.map((on, i) => <i key={i} className={on ? "on" : ""} />)}</div>;
 }
 
 export default function Home() {
@@ -585,7 +584,11 @@ export default function Home() {
           <div><dt>{c.paidBy}</dt><dd>{order.pay === "card" ? c.card : c.apple}</dd></div>
           <div><dt>{c.total}</dt><dd className="amount">{money(order.total)}</dd></div>
         </dl>
-        <div className="proof"><QRMock value={order.no} /><small>{c.proof}</small></div>
+        <aside className="bookingStatusPanel">
+          <small>{c.bookingStatusLabel}</small>
+          <strong>{c.bookingStatus}</strong>
+          <p>{c.arrivalProof}</p>
+        </aside>
       </div>
     </article>
   );
@@ -831,28 +834,32 @@ export default function Home() {
     if (!lastOrder) return renderHome();
     return (
       <main className="subpage donePage">
-        <p className="eyebrow">04 / 04</p>
+        <p className="doneStatus"><span aria-hidden="true">✓</span>{c.doneStatus}</p>
         <h1>{c.doneTitle}</h1>
         <p className="subLead">{c.doneSub}</p>
-        <Ticket order={lastOrder} />
         <section className="lineHandoff">
           <div className="lineHandoffCopy">
             <p className="eyebrow">{c.lineEyebrow}</p>
             <h2>{c.lineTitle}</h2>
             <p>{c.lineBody}</p>
-            <ul>{c.lineBenefits.map((item) => <li key={item}>{item}</li>)}</ul>
-            <small>{c.linePrivacy}</small>
           </div>
           <div className="lineHandoffAction">
+            <b className="lineActionLabel">{c.lineActionLabel}</b>
             <button className={`lineButton ${lineConnected ? "connected" : ""}`} type="button" onClick={() => setLineConnected(true)} disabled={lineConnected}>
               <span className="lineMark" aria-hidden="true">LINE</span>
               {lineConnected ? c.lineConnected : c.lineButton}
             </button>
+            {!lineConnected && <small className="lineActionNote">{c.lineActionNote}</small>}
             {lineConnected && <p className="lineConnectedHelp" aria-live="polite">{c.lineConnectedHelp}</p>}
           </div>
+          <div className="lineHandoffDetails">
+            <ul>{c.lineBenefits.map((item) => <li key={item}>{item}</li>)}</ul>
+            <small>{c.linePrivacy}</small>
+          </div>
         </section>
+        <Ticket order={lastOrder} />
         <div className="doneActions">
-          <button className="primaryButton" onClick={() => navigate("home")}>{c.home}</button>
+          <button className="secondaryButton" onClick={() => navigate("home")}>{c.home}</button>
         </div>
       </main>
     );
