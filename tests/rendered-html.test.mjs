@@ -29,6 +29,7 @@ test("server-renders the Gold Pig booking experience", async () => {
   assert.match(html, /gold-pig-grilled-pork-highres\.jpg/);
   assert.match(html, /asia-miles-logo-transparent\.png/);
   assert.match(html, /openrice-logo\.svg/);
+  assert.match(html, /openrice-favicon\.svg/);
   assert.doesNotMatch(html, /codex-preview|Building your site|Your site is taking shape/i);
 });
 
@@ -40,6 +41,7 @@ test("keeps food imagery, responsive session cards and FTP assets in source", as
     access(new URL("../public/assets/gold-pig-grilled-pork-highres.jpg", import.meta.url)),
     access(new URL("../public/assets/asia-miles-logo-transparent.png", import.meta.url)),
     access(new URL("../public/assets/openrice-logo.svg", import.meta.url)),
+    access(new URL("../public/openrice-favicon.svg", import.meta.url)),
   ]);
 
   assert.match(page, /className="sessionFeaturePhoto"/);

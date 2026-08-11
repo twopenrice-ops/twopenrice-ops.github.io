@@ -12,6 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
+    icons: { icon: "/openrice-favicon.svg" },
     openGraph: { title, description, images: [{ url: image, width: 1536, height: 864 }] },
     twitter: { card: "summary_large_image", title, description, images: [image] },
   };

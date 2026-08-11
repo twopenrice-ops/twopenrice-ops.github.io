@@ -34,7 +34,7 @@ function ftpExport(): Plugin {
     },
     transformIndexHtml(html) {
       return html
-        .replace('    <link rel="icon" href="./favicon.svg" />', '    <link rel="icon" href="./images/favicon.svg" />')
+        .replace('    <link rel="icon" type="image/svg+xml" href="./openrice-favicon.svg" />', '    <link rel="icon" type="image/svg+xml" href="./images/openrice-favicon.svg" />')
         .replace('    <link rel="canonical" href="https://twopenrice-ops.github.io/" />\n', "")
         .replace('    <meta property="og:url" content="https://twopenrice-ops.github.io/" />\n', "")
         .replaceAll("https://twopenrice-ops.github.io/og.png", "./images/og.png");
