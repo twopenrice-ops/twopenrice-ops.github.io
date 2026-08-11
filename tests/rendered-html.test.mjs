@@ -41,6 +41,11 @@ test("keeps food imagery, responsive session cards and FTP assets in source", as
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
     access(new URL("../public/assets/gold-pig-grilled-pork-highres.jpg", import.meta.url)),
+    access(new URL("../public/assets/gold-pig-grill-overhead.jpg", import.meta.url)),
+    access(new URL("../public/assets/gold-pig-grill-action.jpg", import.meta.url)),
+    access(new URL("../public/assets/gold-pig-raw-cuts.jpg", import.meta.url)),
+    access(new URL("../public/assets/openrice-ambassador.jpg", import.meta.url)),
+    access(new URL("../public/assets/asia-miles-gold-pig-guests.jpg", import.meta.url)),
     access(new URL("../public/assets/asia-miles-logo-transparent.png", import.meta.url)),
     access(new URL("../public/assets/openrice-logo.svg", import.meta.url)),
     access(new URL("../public/openrice-favicon.svg", import.meta.url)),
@@ -50,6 +55,10 @@ test("keeps food imagery, responsive session cards and FTP assets in source", as
   assert.match(page, /className="sessionCard"/);
   assert.match(css, /\.sessionGrid\s*\{[^}]*grid-template-columns:\s*1fr 1fr/s);
   assert.match(css, /@media \(max-width:\s*560px\)[\s\S]*\.sessionCard button\s*\{[^}]*width:\s*100%/);
+  const photoReferences = [...page.matchAll(/["'](\.\/assets\/(?:gold-pig[^"']*|openrice-ambassador|asia-miles-gold-pig-guests)\.(?:jpe?g|png))["']/g)].map((match) => match[1]);
+  const repeatedPhotos = photoReferences.filter((photo, index) => photoReferences.indexOf(photo) !== index);
+  assert.equal(photoReferences.length, 11, "all campaign photo placements should be covered by the uniqueness check");
+  assert.deepEqual(repeatedPhotos, [], "each photography asset should appear only once in the page source");
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   await assert.rejects(access(new URL("../app/_sites-preview", import.meta.url)));
 });

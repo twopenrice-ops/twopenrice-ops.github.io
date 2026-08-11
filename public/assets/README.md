@@ -15,6 +15,12 @@ The event assets in this folder are used for the functional partnership demo.
   2400 × 1800 editorial photographs from Harper's Bazaar Taiwan
 - `gold-pig-interior.jpg`: Gold Pig Taipei interior photograph from TVBS 食尚玩家
 - `gold-pig-interior-crop.jpg`: watermark-free editorial crop of `gold-pig-interior.jpg` used by the page
+- `gold-pig-grill-overhead.jpg`, `gold-pig-raw-cuts.jpg`, `gold-pig-grill-action.jpg`:
+  food photographs supplied by OpenRice for this campaign
+- `openrice-ambassador.jpg`, `asia-miles-gold-pig-guests.jpg`:
+  OpenRice and Asia Miles campaign photographs supplied by OpenRice
+
+Every photography asset is assigned to one visual placement only. Brand logos may repeat as part of the site navigation and booking confirmation.
 
 Source: https://tw.openrice.com/info/event/aml_goldpig_2026/index.html
 GQ source: https://www.gq.com.tw/article/%E9%9F%93%E5%9C%8B-%E9%87%91%E8%B1%AC%E9%A3%9F%E5%A0%82-%E5%8F%B0%E7%81%A3

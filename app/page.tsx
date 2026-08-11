@@ -703,7 +703,7 @@ export default function Home() {
         </div>
         <div className="photoMosaic">
           <figure className="photoMosaicLead"><img loading="lazy" src="./assets/gold-pig-meat-prep.jpg" alt={c.experienceCaptions[0]} /><figcaption>{c.experienceCaptions[0]}</figcaption></figure>
-          <figure><img loading="lazy" src="./assets/gold-pig-grilled-pork-highres.jpg" alt={c.experienceCaptions[1]} /><figcaption>{c.experienceCaptions[1]}</figcaption></figure>
+          <figure><img loading="lazy" src="./assets/gold-pig-grill-overhead.jpg" alt={c.experienceCaptions[1]} /><figcaption>{c.experienceCaptions[1]}</figcaption></figure>
           <figure><img loading="lazy" src="./assets/gold-pig-chefs.jpg" alt={c.experienceCaptions[2]} /><figcaption>{c.experienceCaptions[2]}</figcaption></figure>
         </div>
       </section>
@@ -724,7 +724,7 @@ export default function Home() {
               <span className="sessionPrice">{c.sessionPrice}</span>
             </div>
             <figure className="sessionFeaturePhoto">
-              <img loading="lazy" src="./assets/gold-pig-grilled-pork-highres.jpg" alt={lang === "tc" ? "金豬食堂熟成肉品桌邊現烤" : "Gold Pig aged cuts grilled at the table"} />
+              <img loading="lazy" src="./assets/gold-pig-grill-action.jpg" alt={lang === "tc" ? "金豬食堂熟成肉品桌邊現烤" : "Gold Pig aged cuts grilled at the table"} />
               <figcaption>{c.sessionPhotoCaption}</figcaption>
             </figure>
           </div>
@@ -798,7 +798,7 @@ export default function Home() {
             const stock = remaining(session, key);
             return (
               <article className={`packageRow ${qty ? "selected" : ""}`} key={key}>
-                <img src={isFour ? "./assets/gold-pig-meat-prep.jpg" : "./assets/gold-pig-grilled-pork-highres.jpg"} alt="" />
+                <img src={isFour ? "./assets/asia-miles-gold-pig-guests.jpg" : "./assets/openrice-ambassador.jpg"} alt="" />
                 <div className="packageCopy">
                   <h2>{isFour ? c.four : c.six}</h2>
                   <strong>{money(db.prices[key])}</strong>
@@ -815,7 +815,7 @@ export default function Home() {
           })}
         </div>
         <aside className="packageMenuPreview">
-          <img loading="lazy" src="./assets/gold-pig-table-spread-highres.jpg" alt="" />
+          <img loading="lazy" src="./assets/gold-pig-raw-cuts.jpg" alt="" />
           <div><b>{c.menuTitle}</b><p>{c.menuPreview}</p><small>{c.menuNote}</small></div>
         </aside>
         <div className="stickySummary">
