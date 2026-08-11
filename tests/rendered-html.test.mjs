@@ -21,6 +21,8 @@ test("server-renders the Gold Pig booking experience", async () => {
 
   const html = await response.text();
   assert.match(html, /<title>Asia Miles 會員限定｜金豬食堂 OpenRice 專屬保留位<\/title>/);
+  assert.match(html, /不用飛首爾，台北就能吃到金豬經典。/);
+  assert.doesNotMatch(html, /首爾一位難求，今晚為你留位。/);
   assert.match(html, /把想吃的這一晚，先留給自己/);
   assert.match(html, /專人桌邊代烤・五款肉品完整套餐/);
   assert.match(html, /每位 NT\$2,280｜已含 10% 服務費/);

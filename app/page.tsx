@@ -61,7 +61,7 @@ const COPY = {
     demo: "功能展示 DEMO｜不會進行實際扣款",
     lang: "EN",
     heroEyebrow: "ASIA MILES 會員限定｜OPENRICE 專屬保留位",
-    heroTitle: "首爾一位難求，今晚為你留位。",
+    heroTitle: "不用飛首爾，台北就能吃到金豬經典。",
     heroLead: "OpenRice 為 Asia Miles 會員保留四個週五晚間席次。選擇日期與桌型，完成付款即可確認訂位。",
     trustLine: "Asia Miles 會員限定・四個週五晚上・付款完成即確認訂位",
     book: "查看專屬保留場次",
