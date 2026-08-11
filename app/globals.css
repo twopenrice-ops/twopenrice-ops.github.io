@@ -87,7 +87,7 @@ img { display: block; max-width: 100%; }
 .siteHeader .headerCta:hover { background: var(--red-dark); }
 .siteHeader .langButton { border: 1px solid var(--line); padding: 7px 11px; min-width: 45px; }
 
-.memberHero, .experienceSection, .benefitSection, .sessionsSection, .storySection, .processSection, .noticeSection {
+.memberHero, .experienceSection, .benefitSection, .storySection, .processSection, .noticeSection {
   width: min(1120px, calc(100% - 48px));
   margin: 0 auto;
 }
@@ -330,9 +330,83 @@ img { display: block; max-width: 100%; }
 .benefitGrid p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
 .serviceNote { margin: 24px 0 0; padding-left: 16px; border-left: 3px solid var(--yellow); color: var(--muted); font-size: 13px; line-height: 1.6; }
 
-.sessionsSection { padding: 90px 0 102px; }
-.sectionHeading { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; margin-bottom: 45px; }
-.sectionHeading .eyebrow { grid-column: 1 / -1; }
+.sessionsSection {
+  width: 100%;
+  padding: 108px 0 112px;
+  background: #25150f;
+  color: #fff8ed;
+  scroll-margin-top: 96px;
+}
+.sessionsInner { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+.sessionLead {
+  display: grid;
+  grid-template-columns: .88fr 1.12fr;
+  gap: 72px;
+  align-items: center;
+  margin-bottom: 58px;
+}
+.sessionLeadCopy .eyebrow { color: #e5a35c; }
+.sessionLeadCopy h2 {
+  margin: 0;
+  font-family: "Songti TC", "Noto Serif TC", "PMingLiU", serif;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.12;
+  letter-spacing: -.03em;
+}
+.sessionLeadCopy > p:last-of-type {
+  margin: 26px 0 0;
+  color: #d9c8bb;
+  font-size: 17px;
+  line-height: 1.85;
+}
+.sessionPrice {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 11px 0 8px;
+  border-top: 1px solid #806759;
+  border-bottom: 1px solid #806759;
+  color: #f3c680;
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: .04em;
+}
+.sessionFeaturePhoto { margin: 0; position: relative; }
+.sessionFeaturePhoto::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 -90px 80px -48px rgba(22,9,5,.86);
+  pointer-events: none;
+}
+.sessionFeaturePhoto img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center 46%;
+}
+.sessionFeaturePhoto figcaption {
+  position: absolute;
+  z-index: 1;
+  left: 24px;
+  bottom: 20px;
+  color: #fff8ed;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: .08em;
+}
+.sessionGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.sessionCard {
+  min-height: 252px;
+  padding: 28px 30px 26px;
+  background: #fbf4e8;
+  color: var(--ink);
+  border-top: 4px solid #c47d3b;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.sessionCard:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(0,0,0,.2); }
+.sessionCard header { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
 .sectionHeading h2, .storyCopy h2, .processSection h2, .noticeSection h2 {
   margin: 0;
   font-family: "Songti TC", "Noto Serif TC", "PMingLiU", serif;
@@ -340,28 +414,30 @@ img { display: block; max-width: 100%; }
   line-height: 1.2;
   letter-spacing: -.025em;
 }
-.sectionHeading > p:last-child { margin: 5px 0 0; color: var(--muted); line-height: 1.75; }
-.sessionTable { border-top: 2px solid var(--ink); }
-.sessionRow {
-  min-height: 112px;
-  display: grid;
-  grid-template-columns: 2fr 1.8fr .7fr 138px;
-  align-items: center;
-  gap: 28px;
-  border-bottom: 1px solid var(--line);
-  transition: background-color .2s ease;
+.sessionDate { display: flex; align-items: baseline; gap: 14px; }
+.sessionDate strong { font-family: "Songti TC", "Noto Serif TC", serif; font-size: 29px; }
+.sessionDate span { color: var(--muted); font-size: 13px; }
+.sessionExperience { margin: 25px 0 28px; color: #625247; font-size: 14px; line-height: 1.6; }
+.sessionCard footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #ded0bd;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 22px;
 }
-.sessionRow:hover { background: rgba(241,232,218,.46); }
-.sessionDate { display: flex; align-items: baseline; gap: 20px; }
-.sessionDate strong { font-family: "Songti TC", "Noto Serif TC", serif; font-size: 27px; }
-.sessionDate span { color: var(--muted); font-size: 14px; }
 .sessionStock { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .sessionStock span { color: var(--muted); font-size: 12px; }
-.sessionStock b { display: block; margin-top: 3px; color: var(--ink); font-size: 22px; }
-.statusText { color: var(--teal); font-size: 12px; font-weight: 800; }
-.statusText.low { color: var(--red); }
-.sessionRow > button {
+.sessionStock b { display: block; margin-top: 4px; color: var(--ink); font-size: 22px; }
+.sessionStock small { margin-left: 4px; color: var(--muted); font-size: 10px; font-weight: 500; }
+.statusText { padding: 6px 8px; background: #e4efe9; color: #176040; font-size: 11px; font-weight: 800; white-space: nowrap; }
+.statusText.low { background: #f4dfdc; color: var(--red); }
+.statusText.closed { background: #e8e1d8; color: #81746b; }
+.sessionCard button {
   min-height: 42px;
+  min-width: 138px;
+  padding: 10px 18px;
   border: 1px solid var(--red);
   background: var(--red);
   color: white;
@@ -369,8 +445,8 @@ img { display: block; max-width: 100%; }
   font-size: 13px;
   font-weight: 700;
 }
-.sessionRow > button:hover:not(:disabled) { border-color: var(--red-dark); background: var(--red-dark); }
-.sessionRow > button:disabled { border-color: var(--line); background: transparent; color: #aaa198; cursor: not-allowed; }
+.sessionCard button:hover:not(:disabled) { border-color: var(--red-dark); background: var(--red-dark); }
+.sessionCard button:disabled { border-color: var(--line); background: transparent; color: #aaa198; cursor: not-allowed; }
 
 .storySection { padding: 100px 0; display: grid; grid-template-columns: .92fr 1.08fr; gap: 84px; align-items: start; }
 .storyImage { position: sticky; top: 105px; }
@@ -648,7 +724,7 @@ img { display: block; max-width: 100%; }
   .asiaMilesLogo { width: 112px; }
   .openRiceLogo { width: 98px; }
   .campaignMasthead { height: 470px; }
-  .memberHero, .experienceSection, .benefitSection, .sessionsSection, .storySection, .processSection, .noticeSection { width: min(100% - 36px, 680px); }
+  .memberHero, .experienceSection, .benefitSection, .storySection, .processSection, .noticeSection { width: min(100% - 36px, 680px); }
   .memberHero { grid-template-columns: 1fr; gap: 42px; padding: 58px 0 56px; }
   .memberHeroCopy h1 { font-size: 50px; }
   .factsStrip { width: min(100% - 36px, 680px); grid-template-columns: 1fr; }
@@ -668,13 +744,11 @@ img { display: block; max-width: 100%; }
   .benefitGrid article, .benefitGrid article + article { min-height: 0; padding: 22px 0; border-right: 0; border-bottom: 1px solid var(--line); }
   .benefitGrid h3 { margin: 28px 0 10px; }
   .heroLead { font-size: 18px; }
-  .sectionHeading { grid-template-columns: 1fr; gap: 16px; }
-  .sectionHeading .eyebrow { grid-column: auto; }
-  .sessionRow { grid-template-columns: 1fr 1fr; gap: 15px 20px; padding: 21px 0; }
-  .sessionDate strong { font-size: 22px; }
-  .sessionStock { justify-self: end; }
-  .statusText { align-self: center; }
-  .sessionRow > button { min-width: 130px; justify-self: end; }
+  .sessionsSection { width: 100%; padding: 88px 0 92px; }
+  .sessionsInner { width: min(100% - 36px, 680px); }
+  .sessionLead { grid-template-columns: 1fr; gap: 38px; margin-bottom: 42px; }
+  .sessionFeaturePhoto { grid-row: 2; }
+  .sessionGrid { grid-template-columns: 1fr; }
   .storySection { grid-template-columns: 1fr; gap: 42px; }
   .storyImage { position: static; }
   .storyImage img { aspect-ratio: 16/11; }
@@ -715,7 +789,7 @@ img { display: block; max-width: 100%; }
   .siteHeader .openRiceLogo { width: 72px; height: 26px; }
   .campaignMasthead { height: 330px; }
   .campaignMasthead img { object-position: 9% center; }
-  .memberHero, .experienceSection, .benefitSection, .sessionsSection, .storySection, .processSection, .noticeSection { width: calc(100% - 32px); }
+  .memberHero, .experienceSection, .benefitSection, .storySection, .processSection, .noticeSection { width: calc(100% - 32px); }
   .memberHero { padding: 38px 0 46px; }
   .memberHeroCopy h1, .subpage > h1 { font-size: 39px; }
   .memberHeroPhoto figcaption { display: block; }
@@ -734,13 +808,27 @@ img { display: block; max-width: 100%; }
   .menuShowcaseCopy h2 { font-size: 38px; }
   .menuIntro { font-size: 15px; }
   .menuGroup ul { grid-template-columns: 1fr; gap: 8px; }
-  .sessionsSection, .storySection, .processSection, .noticeSection { padding-top: 68px; padding-bottom: 74px; }
+  .storySection, .processSection, .noticeSection { padding-top: 68px; padding-bottom: 74px; }
   .sectionHeading h2, .storyCopy h2, .processSection h2, .noticeSection h2 { font-size: 34px; }
-  .sessionRow { grid-template-columns: 1fr auto; }
+  .sessionsSection { width: 100%; padding: 68px 0 74px; }
+  .sessionsInner { width: calc(100% - 32px); }
+  .sessionLead { gap: 30px; margin-bottom: 32px; }
+  .sessionLeadCopy h2 { font-size: 38px; }
+  .sessionLeadCopy > p:last-of-type { margin-top: 18px; font-size: 15px; line-height: 1.75; }
+  .sessionPrice { margin-top: 22px; font-size: 12px; }
+  .sessionFeaturePhoto img { aspect-ratio: 4 / 3; }
+  .sessionFeaturePhoto figcaption { left: 16px; bottom: 14px; font-size: 11px; }
+  .sessionGrid { gap: 14px; }
+  .sessionCard { min-height: 0; padding: 22px 20px 20px; }
+  .sessionCard header { gap: 12px; }
   .sessionDate { display: block; }
+  .sessionDate strong { display: block; font-size: 25px; }
   .sessionDate span { display: block; margin-top: 5px; }
-  .sessionStock { gap: 18px; }
-  .sessionStock b { font-size: 19px; }
+  .sessionExperience { margin: 18px 0 20px; font-size: 13px; }
+  .sessionCard footer { align-items: stretch; flex-direction: column; gap: 16px; padding-top: 17px; }
+  .sessionStock { gap: 28px; }
+  .sessionStock b { font-size: 20px; }
+  .sessionCard button { width: 100%; min-height: 46px; }
   .processSection ol { grid-template-columns: 1fr; }
   .processSection li, .processSection li + li { min-height: 88px; padding: 16px 0; border-right: 0; border-top: 1px solid var(--line); }
   .processSection li:first-child { border-top: 0; }

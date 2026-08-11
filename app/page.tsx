@@ -73,17 +73,20 @@ const COPY = {
     priceLabel: "套餐",
     price: "4 人桌 NT$9,120｜6 人桌 NT$13,680",
     sessionKicker: "OPENRICE RESERVED",
-    sessionTitle: "先選一個想赴約的晚上",
-    sessionIntro: "以下為 OpenRice 提供給 Asia Miles 會員的專屬保留位。桌數售完即止；每筆訂單最多選 2 桌，可混搭 4 人與 6 人桌。",
+    sessionTitle: "把想吃的這一晚，先留給自己",
+    sessionIntro: "厚切熟成豬肉上桌後由專人代烤，接著是牛小排與熱騰騰泡菜鍋。選一個週五，OpenRice 已替 Asia Miles 會員保留席次。",
+    sessionPhotoCaption: "熟成肉品現烤上桌",
+    sessionExperience: "專人桌邊代烤・五款肉品完整套餐",
+    sessionPrice: "每位 NT$2,280｜已含 10% 服務費",
     four: "4 人桌",
     six: "6 人桌",
     remaining: "剩餘",
     tables: "桌",
-    choose: "選這一場",
+    choose: "選這一晚",
     soldOut: "已售完",
     closed: "尚未開放",
     almost: "即將售完",
-    available: "可預訂",
+    available: "尚有席次",
     aboutKicker: "THE RESTAURANT",
     aboutTitle: "經典韓式燒肉，由專人替你烤到剛好。",
     aboutBody: "金豬食堂以厚切熟成豬肉與專人桌邊代烤聞名，連續多年獲《米其林指南》必比登推薦並名列 50 Best Discovery。這次不必現場候位，OpenRice 已先為 Asia Miles 會員保留席次。",
@@ -210,17 +213,20 @@ const COPY = {
     priceLabel: "Set menu",
     price: "Table for 4 NT$9,120 | Table for 6 NT$13,680",
     sessionKicker: "OPENRICE RESERVED",
-    sessionTitle: "Choose the night that works for you",
-    sessionIntro: "These seats are reserved by OpenRice for Asia Miles members. Tables are limited. Mix tables for 4 and 6, up to two per order.",
+    sessionTitle: "Save a Friday night for something delicious",
+    sessionIntro: "Thick-cut aged pork is grilled for you at the table, followed by bone-in beef short rib and bubbling kimchi stew. Choose your Friday; OpenRice has reserved the seats for Asia Miles members.",
+    sessionPhotoCaption: "Aged cuts, grilled at your table",
+    sessionExperience: "Tableside grilling · Five-cut complete set menu",
+    sessionPrice: "NT$2,280 per guest | 10% service included",
     four: "Table for 4",
     six: "Table for 6",
     remaining: "Left",
     tables: "tables",
-    choose: "Choose",
+    choose: "Choose this night",
     soldOut: "Sold out",
     closed: "Not open",
     almost: "Almost full",
-    available: "Available",
+    available: "Seats available",
     aboutKicker: "THE RESTAURANT",
     aboutTitle: "Classic Korean barbecue, grilled for you at the table.",
     aboutBody: "Gold Pig is known for thick-cut aged pork and expert tableside grilling, with years of Michelin Bib Gourmand recognition and a place on 50 Best Discovery. No walk-in wait is needed: OpenRice has already reserved selected seats for Asia Miles members.",
@@ -709,26 +715,41 @@ export default function Home() {
       </section>
 
       <section className="sessionsSection" id="sessions">
-        <div className="sectionHeading">
-          <p className="eyebrow">{c.sessionKicker}</p>
-          <h2>{c.sessionTitle}</h2>
-          <p>{c.sessionIntro}</p>
-        </div>
-        <div className="sessionTable">
-          {db.sessions.slice().sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`)).map((item) => {
-            const r4 = remaining(item, "t4");
-            const r6 = remaining(item, "t6");
-            const sold = r4 + r6 === 0;
-            const low = r4 + r6 > 0 && r4 + r6 <= 4;
-            return (
-              <article className="sessionRow" key={item.id}>
-                <div className="sessionDate"><strong>{formatDate(item.date)}</strong><span>{item.time}</span></div>
-                <div className="sessionStock"><span>{c.four}<b>{r4}</b></span><span>{c.six}<b>{r6}</b></span></div>
-                <div className={`statusText ${low ? "low" : ""}`}>{!item.open ? c.closed : sold ? c.soldOut : low ? c.almost : c.available}</div>
-                <button disabled={!item.open || sold} onClick={() => chooseSession(item)}>{!item.open ? c.closed : sold ? c.soldOut : c.choose}</button>
-              </article>
-            );
-          })}
+        <div className="sessionsInner">
+          <div className="sessionLead">
+            <div className="sessionLeadCopy">
+              <p className="eyebrow">{c.sessionKicker}</p>
+              <h2>{c.sessionTitle}</h2>
+              <p>{c.sessionIntro}</p>
+              <span className="sessionPrice">{c.sessionPrice}</span>
+            </div>
+            <figure className="sessionFeaturePhoto">
+              <img loading="lazy" src="./assets/gold-pig-grilled-pork-highres.jpg" alt={lang === "tc" ? "金豬食堂熟成肉品桌邊現烤" : "Gold Pig aged cuts grilled at the table"} />
+              <figcaption>{c.sessionPhotoCaption}</figcaption>
+            </figure>
+          </div>
+          <div className="sessionGrid">
+            {db.sessions.slice().sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`)).map((item) => {
+              const r4 = remaining(item, "t4");
+              const r6 = remaining(item, "t6");
+              const sold = r4 + r6 === 0;
+              const low = r4 + r6 > 0 && r4 + r6 <= 4;
+              const statusClass = !item.open || sold ? "closed" : low ? "low" : "";
+              return (
+                <article className="sessionCard" key={item.id}>
+                  <header>
+                    <div className="sessionDate"><strong>{formatDate(item.date)}</strong><span>{item.time}</span></div>
+                    <div className={`statusText ${statusClass}`}>{!item.open ? c.closed : sold ? c.soldOut : low ? c.almost : c.available}</div>
+                  </header>
+                  <p className="sessionExperience">{c.sessionExperience}</p>
+                  <footer>
+                    <div className="sessionStock"><span>{c.four}<b>{r4}<small>{c.tables}</small></b></span><span>{c.six}<b>{r6}<small>{c.tables}</small></b></span></div>
+                    <button disabled={!item.open || sold} onClick={() => chooseSession(item)}>{!item.open ? c.closed : sold ? c.soldOut : c.choose}</button>
+                  </footer>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </section>
 
