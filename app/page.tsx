@@ -162,7 +162,10 @@ const COPY = {
     lineActionLabel: "訂位管理入口",
     lineActionNote: "約 10 秒完成｜不需下載 OpenRice App",
     lineButton: "立即綁定這筆訂位",
-    lineUnavailable: "訂位已成立，但 LINE 綁定連結暫時無法產生。請保留訂位編號並聯絡 OpenRice 客服。",
+    lineUnavailable: "LINE 綁定連結尚未建立。請直接重新產生連結，不需再次付款。",
+    lineRetryButton: "重新產生 LINE 綁定連結",
+    lineRetrying: "正在建立連結…",
+    lineRetryFailed: "連結仍未建立，請稍後再試；你的訂位與付款狀態不受影響。",
     linePrivacy: "LINE 僅用於本次訂位管理與必要服務通知；你可以隨時關閉通知。",
     orderNo: "訂單編號",
     dining: "用餐場次",
@@ -302,7 +305,10 @@ const COPY = {
     lineActionLabel: "BOOKING MANAGEMENT",
     lineActionNote: "Takes about 10 seconds · No OpenRice app required",
     lineButton: "Link this booking now",
-    lineUnavailable: "Your booking is confirmed, but the LINE link is temporarily unavailable. Keep your booking number and contact OpenRice support.",
+    lineUnavailable: "Your LINE link has not been created yet. Generate it again without paying twice.",
+    lineRetryButton: "Generate LINE link again",
+    lineRetrying: "Creating link…",
+    lineRetryFailed: "The link is still unavailable. Try again later; your booking and payment remain confirmed.",
     linePrivacy: "LINE is used only for this booking and essential service notices. You can turn notifications off at any time.",
     orderNo: "Order number",
     dining: "Seating",
@@ -349,6 +355,28 @@ function remaining(session: Session, key: "t4" | "t6") {
   return Math.max(0, session[`${key}_total`] - session[`${key}_sold`]);
 }
 
+type LineBookingInput = {
+  date: string;
+  time: string;
+  tables4: number;
+  tables6: number;
+  totalAmount: number;
+  paymentMethod: PayMethod;
+};
+
+async function createLineBooking(input: LineBookingInput) {
+  const response = await fetch(`${LINE_CRM_ORIGIN}/api/gold-pig/demo-bookings`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify(input),
+  });
+  const result = await response.json().catch(() => null);
+  if (!response.ok || !result?.ok || !result.booking?.bookingNo || !result.bindUrl) {
+    throw new Error("line_setup_failed");
+  }
+  return { bookingNo: String(result.booking.bookingNo), bindUrl: String(result.bindUrl) };
+}
+
 export default function Home() {
   const [lang, setLang] = useState<Lang>("tc");
   const [view, setView] = useState<View>("home");
@@ -362,6 +390,8 @@ export default function Home() {
   const [paying, setPaying] = useState(false);
   const payingRef = useRef(false);
   const [lastOrderNo, setLastOrderNo] = useState("");
+  const [lineRetrying, setLineRetrying] = useState(false);
+  const [lineRetryFailed, setLineRetryFailed] = useState(false);
   const [adminDraft, setAdminDraft] = useState<Database | null>(null);
   const [adminDirty, setAdminDirty] = useState(false);
   const [savedFlash, setSavedFlash] = useState(false);
@@ -500,21 +530,15 @@ export default function Home() {
       let lineBindUrl = "";
       let lineSetupError = false;
       try {
-        const response = await fetch(`${LINE_CRM_ORIGIN}/api/gold-pig/demo-bookings`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            date: commitSession.date,
-            time: commitSession.time,
-            tables4: cart.t4,
-            tables6: cart.t6,
-            totalAmount: cart.t4 * commit.prices.t4 + cart.t6 * commit.prices.t6,
-            paymentMethod: payMethod,
-          }),
+        const result = await createLineBooking({
+          date: commitSession.date,
+          time: commitSession.time,
+          tables4: cart.t4,
+          tables6: cart.t6,
+          totalAmount: cart.t4 * commit.prices.t4 + cart.t6 * commit.prices.t6,
+          paymentMethod: payMethod as PayMethod,
         });
-        const result = await response.json();
-        if (!response.ok || !result.ok || !result.booking?.bookingNo || !result.bindUrl) throw new Error("line_setup_failed");
-        no = result.booking.bookingNo;
+        no = result.bookingNo;
         lineBindUrl = result.bindUrl;
       } catch {
         lineSetupError = true;
@@ -543,6 +567,39 @@ export default function Home() {
       setView("done");
       window.scrollTo({ top: 0, behavior: "auto" });
     }, 1200);
+  };
+
+  const retryLineSetup = async () => {
+    if (!lastOrder || lineRetrying) return;
+    setLineRetrying(true);
+    setLineRetryFailed(false);
+    try {
+      const result = await createLineBooking({
+        date: lastOrder.date,
+        time: lastOrder.time,
+        tables4: lastOrder.t4,
+        tables6: lastOrder.t6,
+        totalAmount: lastOrder.total,
+        paymentMethod: lastOrder.pay,
+      });
+      let live = db;
+      try {
+        const raw = window.localStorage.getItem(STORE_KEY);
+        if (raw) live = JSON.parse(raw);
+      } catch { /* use state */ }
+      const next = clone(live);
+      const order = next.orders.find((item: Order) => item.no === lastOrder.no);
+      if (!order) throw new Error("order_not_found");
+      order.no = result.bookingNo;
+      order.lineBindUrl = result.bindUrl;
+      order.lineSetupError = false;
+      persist(next);
+      setLastOrderNo(result.bookingNo);
+    } catch {
+      setLineRetryFailed(true);
+    } finally {
+      setLineRetrying(false);
+    }
   };
 
   const startAdmin = () => {
@@ -905,7 +962,14 @@ export default function Home() {
                 {c.lineButton}
               </a>
             ) : (
-              <p className="lineUnavailable" role="status">{c.lineUnavailable}</p>
+              <div className="lineRetryPanel">
+                <p className="lineUnavailable" role="status">{c.lineUnavailable}</p>
+                <button className="lineButton" type="button" onClick={retryLineSetup} disabled={lineRetrying}>
+                  <span className="lineMark" aria-hidden="true">LINE</span>
+                  {lineRetrying ? c.lineRetrying : c.lineRetryButton}
+                </button>
+                {lineRetryFailed && <small className="lineRetryError" role="status">{c.lineRetryFailed}</small>}
+              </div>
             )}
             {lastOrder.lineBindUrl && <small className="lineActionNote">{c.lineActionNote}</small>}
           </div>

@@ -675,6 +675,9 @@ img { display: block; max-width: 100%; }
 .lineActionLabel { display: block; margin-bottom: 14px; color: #496154; font-size: 11px; letter-spacing: .12em; }
 .lineActionNote { display: block; margin-top: 12px; color: var(--muted); font-size: 11px; line-height: 1.55; text-align: center; }
 .lineUnavailable { margin: 0; padding: 15px; border-left: 3px solid #c48725; background: #fff8e8; color: #6f511d; font-size: 12px; line-height: 1.65; }
+.lineRetryPanel .lineButton { margin-top: 14px; }
+.lineRetryPanel .lineButton:disabled { background: #7acb99; border-color: #7acb99; cursor: wait; transform: none; }
+.lineRetryError { display: block; margin-top: 12px; color: #8a341f; font-size: 11px; line-height: 1.55; }
 
 .emptyState { padding: 34px 0; border-top: 1px solid var(--line); color: var(--muted); }
 

@@ -53,6 +53,9 @@ test("keeps food imagery, responsive session cards and FTP assets in source", as
 
   assert.match(page, /className="sessionFeaturePhoto"/);
   assert.match(page, /className="sessionCard"/);
+  assert.match(page, /重新產生 LINE 綁定連結/);
+  assert.match(page, /const retryLineSetup = async/);
+  assert.doesNotMatch(page, /請保留訂位編號並聯絡 OpenRice 客服/);
   assert.match(css, /\.sessionGrid\s*\{[^}]*grid-template-columns:\s*1fr 1fr/s);
   assert.match(css, /@media \(max-width:\s*560px\)[\s\S]*\.sessionCard button\s*\{[^}]*width:\s*100%/);
   const photoReferences = [...page.matchAll(/["'](\.\/assets\/(?:gold-pig[^"']*|openrice-ambassador|asia-miles-gold-pig-guests)\.(?:jpe?g|png))["']/g)].map((match) => match[1]);
