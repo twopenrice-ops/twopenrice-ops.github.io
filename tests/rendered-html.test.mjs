@@ -36,10 +36,11 @@ test("server-renders the Gold Pig booking experience", async () => {
 });
 
 test("keeps food imagery, responsive session cards and FTP assets in source", async () => {
-  const [page, css, packageJson] = await Promise.all([
+  const [page, css, packageJson, linePage] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../public/line/index.html", import.meta.url), "utf8"),
     access(new URL("../public/assets/gold-pig-grilled-pork-highres.jpg", import.meta.url)),
     access(new URL("../public/assets/gold-pig-grill-overhead.jpg", import.meta.url)),
     access(new URL("../public/assets/gold-pig-grill-action.jpg", import.meta.url)),
@@ -63,5 +64,9 @@ test("keeps food imagery, responsive session cards and FTP assets in source", as
   assert.equal(photoReferences.length, 11, "all campaign photo placements should be covered by the uniqueness check");
   assert.deepEqual(repeatedPhotos, [], "each photography asset should appear only once in the page source");
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
+  assert.match(linePage, /var liffId = '2007974193-o0E3h1J4'/);
+  assert.match(linePage, /https:\/\/openrice-line-crm\.netlify\.app\/api\/gold-pig\/bind/);
+  assert.match(linePage, /https:\/\/lin\.ee\/XCzdUC6/);
+  assert.match(linePage, /await initLiff\(\)[\s\S]*token = readBookingTokenAfterInit\(\)/);
   await assert.rejects(access(new URL("../app/_sites-preview", import.meta.url)));
 });

@@ -43,6 +43,7 @@ function ftpExport(): Plugin {
       const destinationDirectory = path.resolve(outputDirectory, "images");
       await mkdir(destinationDirectory, { recursive: true });
       await copyPublicImages(path.resolve("public"), destinationDirectory);
+      await cp(path.resolve("public", "line"), path.resolve(outputDirectory, "line"), { recursive: true });
     },
   };
 }
