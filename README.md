@@ -37,4 +37,4 @@ npm run build:pages
 npm run build:ftp
 ```
 
-FTP 輸出位於 `2026-aml-or/`：首頁固定為 `index.html`，所有圖片位於 `images/`，JavaScript 與 CSS 位於 `static/`。整包可上傳到公司網域的任意子資料夾。
+FTP 輸出位於 `2026-aml-or/`：活動首頁固定為 `index.html`，LINE 訂位綁定頁位於 `line/index.html`，所有圖片位於 `images/`，JavaScript 與 CSS 位於 `static/`。整包上傳至公司網域後，金豬食堂 LIFF Endpoint URL 應設定為 `https://tw.openrice.com/info/event/2026-aml-or/line/`。
